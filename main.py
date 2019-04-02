@@ -1,13 +1,13 @@
-from flask import Flask, redirect, request, url_for, session, render_template, jsonify
+from flask import Flask, redirect, flash, request, url_for, session, render_template, jsonify
 from flask_pymongo import PyMongo
 import hashlib
+from functools import wraps
 from datetime import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'top-secret'
 app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
 mongo = PyMongo(app)
-mongo.db.todo.drop()
 
 """
 Form Metadata
@@ -63,12 +63,11 @@ def register():
         if error:
             return render_template('register.html', error=error)
         else:
-            # Store
+            # Redirect to login page if successful.
             data.pop('confirm-password')
             data['register-date'] = datetime.now().strftime('%Y-%m-%d')
             mongo.db.todo.insert_one(data)
             return redirect(url_for('login'))
-        # Redirect to login page
 
         # Print inputs
         print(data)
@@ -90,6 +89,7 @@ def login():
         if mongo.db.todo.find({'email': login['email']}).count() > 0:
             record = mongo.db.todo.find({'email': login['email']})[0]
             if record['password'] == login['password']:
+                session['logged_in'] = login['email']
                 return redirect(url_for('home'))
             else:
                 error = 'Incorrect Credentials.'
@@ -102,6 +102,12 @@ def login():
     # Redirect to home
     else:
         return render_template('login.html', title='Todo - Login Page')
+
+@app.route('/logout')
+@login_required
+def logout():
+    session.pop('logged_in')
+    return redirect(url_for('login'))
 
 @app.route('/')
 @login_required

@@ -4,43 +4,44 @@
 <section class="section">
 	<section class="container">
 		<article class="content">
-			<h1>Register</h1>
+			<h1>Registration Page</h1>
+			<p class="help">Fill in your details below and press register button to submit.</p>
 			<form class="form" method="POST">
 				
 
 				  <!-- Full Name -->
-				  <div class="control">
+				  <div class="field">
 				  	<label class="label">Full Name</label>
 				    <input required class="input is-info" type="text" placeholder="Enter full name..." name="reg-name">
 				  </div>
 				  <!-- Email -->
-				  <div class="control">
+				  <div class="field">
 				  	<label class="label">Email</label>
 				    <input required class="input is-info" type="text" placeholder="Enter password..." name="reg-email">
 				  </div>
 
 				  <!-- Password -->
-				  <div class="control">
+				  <div class="field">
 				  	<label class="label">Password</label>
 				    <input required class="input is-info" type="password" placeholder="Confirm password..." name="reg-password">
 				  </div>
 
-
 				  <!-- Confirm Password -->
-				  <div class="control">
+				  <div class="field">
 				  	<label class="label">Password</label>
 				    <input required class="input is-info" type="password" placeholder="Enter password..." name="reg-confirm-password">
 				  </div>
 
 
 				  <!-- Dob -->
-				  <div class="control">
+				  <div class="field">
 				  	<label class="label">Birthday</label>
 				    <input required class="input is-info" type="date" placeholder="Enter email..." name="reg-dob">
 				  </div>
 
-				  <button class="button is-success" role="submit">Register</button>
-
+				  <div class="field"><button class="button is-primary" role="submit">Register</button>
+</div>
+				  
 				  {% if error %}
 				  <code>{{ error }}</code>
 				  {% endif %}

@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <nav class="navbar is-danger">
+    <nav class="navbar is-link">
         <section class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
+                <a class="navbar-item" href="{{ url_for('home') }}">
                     <img src="https://bulma.io/images/bulma-logo-white.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
                 </a>
                 <div class="navbar-burger burger" data-target="navMenuColordark-example">
@@ -38,14 +38,26 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="field is-grouped">
-                            <p class="control">
+                            {% if session['logged_in'] %}
+                                <p class="control">
+                                <a class="button is-light" href="{{ url_for('logout') }}">
+                                    <span class="icon">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                    </span>
+                                    <span>Logout</span>
+                                </a>
+                                </p>
+                            {% else %}
+                                <p class="control">
                                 <a class="button is-light" href="{{ url_for('login') }}">
                                     <span class="icon">
                                         <i class="fas fa-sign-in-alt"></i>
                                     </span>
                                     <span>Login</span>
                                 </a>
-                            </p>
+                                </p>
+                            {% endif %}
+                            
                             <p class="control">
                                 <a class="button is-light" href="{{ url_for('register') }}">
                                     <span class="icon">

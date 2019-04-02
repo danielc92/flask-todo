@@ -5,22 +5,22 @@
 	<section class="container">
 		<article class="content">
 			<h2>Login Page</h2>
+			<p>Fill in your details below and press <strong>Login</strong> button to proceed.</p>
 			<form class="form" method="POST">
 
-				<div class="field">
 
-				  <div class="control">
+				  <div class="field">
 				  	<label class="label">Email</label>
 				    <input required class="input is-info" type="text" placeholder="Enter email..." name="log-email">
 				  </div>
 
-				  <div class="control">
+				  <div class="field">
 				  	<label class="label">Password</label>
 				    <input required class="input is-info" type="password" placeholder="Enter password..." name="log-password">
 				  </div>
 
-				  <div class="control">
-				  <button class="button is-success is-normal" role="submit">Login</button>
+				  <div class="field">
+				  <button class="button is-primary is-normal" role="submit">Login</button>
 				  </div>
 {% if error %}
 <code>{{ error }}</code>
