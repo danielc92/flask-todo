@@ -8,6 +8,13 @@ Familiarity with the following will help.
 - NOSQL databases
 - Cache servers
 
+# Requirements
+- Login / Register system
+- A NOSQL Task system defined by user
+- Task page with user scope
+- Profile page with user scope
+- Members page with global scope
+
 # Setup
 **How to obtain this repository:**
 ```sh
