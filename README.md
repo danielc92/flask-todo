@@ -18,14 +18,24 @@ Familiarity with the following will help.
 # Setup
 **How to obtain this repository:**
 ```sh
-git clone https//link.to.this.projects.git-repo
+git clone https://github.com/danielc92/flask-todo.git
 ```
 **Modules/dependencies:**
 - `flask`
+- `flask_pymongo`
 
 Install the following dependences:
 ```sh
-pip install flask
+pip install flask flask_pymongo
+```
+
+MongoDB
+```sh
+# Installation using brew
+brew install mongodb
+
+# Running locally
+mongod
 ```
 
 # Tests
@@ -35,5 +45,6 @@ pip install flask
 - Daniel Corcoran
 
 # Sources
-- Sources for techniques/tutorials used in this project to help newcomers
-- Sources for data used in this project
+- [Bulma Documentation](https://bulma.io/)
+- [Flask Documentation](http://flask.pocoo.org/)
+- [MongoDB Manual](https://docs.mongodb.com/manual/introduction/)
