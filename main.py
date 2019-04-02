@@ -25,6 +25,18 @@ Login
 
 """
 
+
+# Login Required function
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect(url_for('login'))
+    return wrap
+
+
 # Main routes
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -92,14 +104,17 @@ def login():
         return render_template('login.html', title='Todo - Login Page')
 
 @app.route('/')
+@login_required
 def home():
     return render_template('base.html', title='Todo - Home')
 
 @app.route('/about')
+@login_required
 def about():
     return render_template('about.html', title='Todo - About')
 
 @app.route('/members')
+@login_required
 def members():
     data = mongo.db.todo.find()
     return render_template('members.html', data=data, title='Todo - Members')
