@@ -1,11 +1,12 @@
-# Project Title
-A few sentences about the project.
-What are you building?
-What problem are you trying to solve?
-Who is the project for? Timeframe?
+# Flask TODO App
+Designing and building a 'todo' style web application. Flask to be used as web framework. Mongodb as a backend and possibly Redis as a cache store.
 
 # Before you get started
-Concepts/Software/Programming modules a user may have to read up on before getting started with this project. eg. 'Read about [neural networks](https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6?gi=44b811975215) before getting started.'
+Familiarity with the following will help.
+- Python **3.6.5**
+- Web frameworks (flask)
+- NOSQL databases
+- Cache servers
 
 # Setup
 **How to obtain this repository:**
@@ -13,23 +14,18 @@ Concepts/Software/Programming modules a user may have to read up on before getti
 git clone https//link.to.this.projects.git-repo
 ```
 **Modules/dependencies:**
-- `pandas`
-- `requests`
-- `jupyter`
-- `sklearn`
+- `flask`
 
 Install the following dependences:
 ```sh
-cd /local/location/of/this/repo
-pip install requirements.txt
+pip install flask
 ```
 
 # Tests
 - Tests performed on this project. What did you do? Which files were used? Was it successful?
 
 # Contributors
-- Name of Contributor 1
-- Name of Contributor 2
+- Daniel Corcoran
 
 # Sources
 - Sources for techniques/tutorials used in this project to help newcomers
