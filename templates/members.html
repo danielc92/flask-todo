@@ -8,12 +8,12 @@
         <section class="columns is-multiline">
             {% for d in data %}
             <div class="column">
-                <article class="notification">
+                <article class="notification is-link">
                     <div class="content">
-                        <h3>{{ d['name'].upper() }}</h3>
-                        <p><strong>Email:</strong> {{ d['email'] }}</p>
-                        <p><strong>Dob:</strong> <code>{{ d['dob'] }}</code></p>
-                        <p><strong>Joined:</strong> <code>{{ d['register-date'] }}</code></p>
+                        <h3 class="has-text-white">{{ d['name'].upper() }}</h3>
+                        <p><strong>Email:</strong> <span class="code">{{ d['email'] }}</span></p>
+                        <p><strong>Dob:</strong> <span class="code">{{ d['dob'] }}</span></p>
+                        <p><strong>Joined:</strong> <span class="code">{{ d['register-date'] }}</span></p>
                     </div>
                 </article>
             </div>
