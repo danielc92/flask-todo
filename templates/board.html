@@ -27,16 +27,18 @@
 			</div>
 		</section>
 			<h2>Your tasks</h2>
-			{% for d in data %}
-				<article class="notification is-light">
-					<div class="content">
-						<h1>{{ d['name'] }}</h1>
-						<p>{{ d['desc'] }}</p>
-						<p>Added: <code>{{ d['date'] }}</code></p>
-						<p class="tag is-dark">{{ d['status'] }}</p>
-					</div>
-				</article>
-			{% endfor %}
+			{% if 'tasks' in data.keys() %}
+				{% for d in data['tasks'] %}
+					<article class="notification is-link">
+						<div class="content">
+							<h1 class="has-text-white">{{ d['name'] }}</h1>
+							<p>{{ d['desc'] }}</p>
+							<p>Added: <code>{{ d['date'] }}</code></p>
+							<p class="tag is-dark">{{ d['status'] }}</p>
+						</div>
+					</article>
+				{% endfor %}
+			{% endif %}
 
 		</article>
 	</section>

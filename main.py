@@ -6,8 +6,12 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'top-secret'
+app.config['SALT'] = 'salty'
 app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
 mongo = PyMongo(app)
+
+# Drop the database
+# mongo.db.todo.drop()
 
 """
 Form Metadata
@@ -24,6 +28,13 @@ Login
 * log-password
 
 """
+
+
+# Hashing function for raw passwords
+def hash_password(password, salt):
+    hashed = hashlib.sha512((password + salt).encode('utf-8')).hexdigest()
+    return hashed
+
 
 # Login Required function
 def login_required(f):
@@ -65,6 +76,7 @@ def register():
             # Redirect to login page if successful.
             data.pop('confirm-password')
             data['register-date'] = datetime.now().strftime('%Y-%m-%d')
+            data['password'] = hash_password(data['password'], salt=app.config['SALT'])
             mongo.db.todo.insert_one(data)
             return redirect(url_for('login'))
 
@@ -87,7 +99,8 @@ def login():
         # Validate credentials
         if mongo.db.todo.find({'email': login['email']}).count() > 0:
             record = mongo.db.todo.find({'email': login['email']})[0]
-            if record['password'] == login['password']:
+            hashed_login_password = hash_password(login['password'], salt=app.config['SALT'])
+            if record['password'] == hashed_login_password:
                 session['logged_in'] = login['email']
                 return redirect(url_for('home'))
             else:
@@ -121,7 +134,7 @@ def home():
         mongo.db.todo.update({'email':session['logged_in']}, {'$push': {'tasks': task}})
         return redirect(url_for('home'))
     else:
-        data = mongo.db.todo.find({'email':session['logged_in']})[0]['tasks']
+        data = mongo.db.todo.find({'email':session['logged_in']})[0]
         return render_template('board.html', title='Todo - Board', data=data)
 
 @app.route('/about')
