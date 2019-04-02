@@ -27,6 +27,9 @@ Login
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method=='POST':
+        # Reset error
+        error = None
+
         # Gather Register Details
         data = dict()
         data['name'] = request.form.get('reg-name')
@@ -34,14 +37,22 @@ def register():
         data['password'] = request.form.get('reg-password')
         data['confirm-password'] = request.form.get('reg-confirm-password')
         data['reg-dob'] = request.form.get('reg-dob')
-        
+
+        # Validation rounds
+        if data['password'] != data['confirm-password']:
+            error = 'Passwords must match.'
+
         # Check if email exists in mongo db
+        if mongo.db.todo.find({'email':data['email']}).count() > 0:
+            error = 'Email already exists.'
 
-        # Hash Password
-
-        # Insert to mongo db
-
-
+        if error:
+            return render_template('register.html', error=error)
+        else:
+            # Store
+            data.pop('confirm-password')
+            mongo.db.todo.insert_one(data)
+            return redirect(url_for('login'))
         # Redirect to login page
 
         # Print inputs
@@ -66,9 +77,11 @@ def home():
 
 @app.route('/members')
 def members():
-    mongo.db.todo.insert_one({'name':'daniel'})
-    users = mongo.db.todo.find()
-    return str(users.count())
+    query = mongo.db.todo.find()
+    users = ''
+    for x in query:
+        users += str(x)
+    return users
 
 # Test routes
 @app.route('/query-users')
