@@ -20,9 +20,12 @@
 				  </div>
 
 				  <div class="control">
-				  <button class="button" role="submit">Login</button>
+				  <button class="button is-success is-normal" role="submit">Login</button>
 				  </div>
+{% if error %}
+<code>{{ error }}</code>
 
+{% endif %}
 
 				</div>
 			</form>

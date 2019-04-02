@@ -60,16 +60,33 @@ def register():
         return render_template('register.html', title='Todo - Register Page')
     else:
         return render_template('register.html', title='Todo - Register Page')
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    if request.method == 'POST':
+        error = None
+        # Gather login details
+        login = dict()
+        login['email'] = request.form.get('log-email')
+        login['password'] = request.form.get('log-password')
 
-    # Gather login details
+        # Validate credentials
+        if mongo.db.todo.find({'email': login['email']}).count() > 0:
+            record = mongo.db.todo.find({'email': login['email']})[0]
+            if record['password'] == login['password']:
+                return redirect(url_for('home'))
+            else:
+                error = 'Incorrect Credentials.'
+        else:
+            error = 'Email does not exist.'
 
-    # Validate against mongodb
+        if error:
+            return render_template('login.html', error=error)
 
     # Redirect to home
-
-    return render_template('login.html', title='Todo - Login Page')
+    else:
+        return render_template('login.html', title='Todo - Login Page')
 
 @app.route('/')
 def home():
