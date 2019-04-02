@@ -1,11 +1,26 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <section class="section">
-	<section class="container">
-		<section class="content">
-			<h2>Members Page</h2>
-		</section>
-	</section>
+    <section class="container">
+        <section class="content">
+            <h2>Members Page</h2>
+        </section>
+        <section class="columns is-multiline">
+            {% for d in data %}
+            <div class="column">
+                <article class="card">
+                    <div class="card-content">
+                        <div class="content">
+                            <h3>{{ d['name'].upper() }}</h3>
+                            <p><strong>Email:</strong> {{ d['email'] }}</p>
+                            <p><strong>Dob:</strong> {{ d['dob'] }}</p>
+                            <p><strong>Joined:</strong> {{ d['register-date'] }}</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </section>
+    </section>
 </section>
 {% endblock %}

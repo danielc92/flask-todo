@@ -1,11 +1,13 @@
 from flask import Flask, redirect, request, url_for, session, render_template, jsonify
 from flask_pymongo import PyMongo
 import hashlib
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'top-secret'
 app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
 mongo = PyMongo(app)
+mongo.db.todo.drop()
 
 """
 Form Metadata
@@ -36,7 +38,7 @@ def register():
         data['email'] = request.form.get('reg-email')
         data['password'] = request.form.get('reg-password')
         data['confirm-password'] = request.form.get('reg-confirm-password')
-        data['reg-dob'] = request.form.get('reg-dob')
+        data['dob'] = request.form.get('reg-dob')
 
         # Validation rounds
         if data['password'] != data['confirm-password']:
@@ -51,6 +53,7 @@ def register():
         else:
             # Store
             data.pop('confirm-password')
+            data['register-date'] = datetime.now().strftime('%Y-%m-%d')
             mongo.db.todo.insert_one(data)
             return redirect(url_for('login'))
         # Redirect to login page
@@ -92,13 +95,14 @@ def login():
 def home():
     return render_template('base.html', title='Todo - Home')
 
+@app.route('/about')
+def about():
+    return render_template('about.html', title='Todo - About')
+
 @app.route('/members')
 def members():
-    query = mongo.db.todo.find()
-    users = ''
-    for x in query:
-        users += str(x)
-    return users
+    data = mongo.db.todo.find()
+    return render_template('members.html', data=data, title='Todo - Members')
 
 # Test routes
 @app.route('/query-users')
