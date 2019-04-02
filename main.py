@@ -25,7 +25,6 @@ Login
 
 """
 
-
 # Login Required function
 def login_required(f):
     @wraps(f)
@@ -109,10 +108,21 @@ def logout():
     session.pop('logged_in')
     return redirect(url_for('login'))
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 @login_required
 def home():
-    return render_template('board.html', title='Todo - Board')
+
+    if request.method == 'POST':
+        task = dict()
+        task['name'] = request.form.get('task-name')
+        task['desc'] = request.form.get('task-desc')
+        task['status'] = 'incomplete'
+        task['date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        mongo.db.todo.update({'email':session['logged_in']}, {'$push': {'tasks': task}})
+        return redirect(url_for('home'))
+    else:
+        data = mongo.db.todo.find({'email':session['logged_in']})[0]['tasks']
+        return render_template('board.html', title='Todo - Board', data=data)
 
 @app.route('/about')
 @login_required

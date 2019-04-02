@@ -3,13 +3,42 @@
 {% block content %}
 <section class="section">
 	<section class="container">
-		<section class="content">
-			<h2>Welcome to the Board Page</h2>
-			<p>Add tasks, modify tasks, check off tasks</p>
+		<article class="content">
+		<section class="columns">
+			<div class="column">
+				<h2>Welcome to the Board Page!</h2>
+				<p>In this page you are able to:</p>
+				<ul>
+					<li>Track your tasks</li>
+					<li>Create new tasks via the form</li>
+				</ul>
+			</div>
+			<div class="column">
+				<h2>Add a Task</h2>
+				<form class="form" method="post">
+	<div class="field">
+							<input required name="task-name" type="text" class="input" placeholder="Important Meeting"></input>
+				</div><div class="field">
+							<input required name="task-desc" type="text" class="input" placeholder="Discuss bar chart to stakeholders."></input>
+						</div><div class="field">
+							<button class="button is-primary">Add</button></div>
+					
+			</form>
+			</div>
+		</section>
 			<h2>Your tasks</h2>
 			{% for d in data %}
+				<article class="notification is-light">
+					<div class="content">
+						<h1>{{ d['name'] }}</h1>
+						<p>{{ d['desc'] }}</p>
+						<p>Added: <code>{{ d['date'] }}</code></p>
+						<p class="tag is-dark">{{ d['status'] }}</p>
+					</div>
+				</article>
 			{% endfor %}
-		</section>
+
+		</article>
 	</section>
 </section>
 {% endblock %}
