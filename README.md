@@ -39,7 +39,12 @@ mongod
 ```
 
 # Tests
-- Tests performed on this project. What did you do? Which files were used? Was it successful?
+The following tests have been successfully completed.
+- 'Render' 'register', 'login', 'members' and 'home' routes
+- Register an account
+- Verify hashing function is working
+- Create task on 'home' route
+- Render tasks on 'home' route
 
 # Contributors
 - Daniel Corcoran
