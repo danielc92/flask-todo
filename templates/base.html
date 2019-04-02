@@ -33,31 +33,35 @@
                     <a class="navbar-item" href="{{ url_for('about') }}">
                         About
                     </a>
-
                 </div>
                 <div class="navbar-end">
+                    {% if session['logged_in'] %}
+                    <a class="navbar-item">
+                                <p class="help">Welcome back <strong>{{ session['logged_in'] }}</strong></p>
+                            </a>
+                            {% endif %}
                     <div class="navbar-item">
                         <div class="field is-grouped">
                             {% if session['logged_in'] %}
-                                <p class="control">
+
+                            <p class="control">
                                 <a class="button is-light" href="{{ url_for('logout') }}">
                                     <span class="icon">
                                         <i class="fas fa-sign-in-alt"></i>
                                     </span>
                                     <span>Logout</span>
                                 </a>
-                                </p>
+                            </p>
                             {% else %}
-                                <p class="control">
+                            <p class="control">
                                 <a class="button is-light" href="{{ url_for('login') }}">
                                     <span class="icon">
                                         <i class="fas fa-sign-in-alt"></i>
                                     </span>
                                     <span>Login</span>
                                 </a>
-                                </p>
+                            </p>
                             {% endif %}
-                            
                             <p class="control">
                                 <a class="button is-light" href="{{ url_for('register') }}">
                                     <span class="icon">

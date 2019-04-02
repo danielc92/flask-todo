@@ -112,7 +112,7 @@ def logout():
 @app.route('/')
 @login_required
 def home():
-    return render_template('base.html', title='Todo - Home')
+    return render_template('board.html', title='Todo - Board')
 
 @app.route('/about')
 @login_required
