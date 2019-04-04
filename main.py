@@ -59,6 +59,7 @@ def login_required(f):
 # Main routes
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+	"""If request method is POST, process registration form, otherwise render form again."""
     if request.method == 'POST':
         # Reset error
         error = None
@@ -127,13 +128,14 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
+	"""Logout a user by clearing their server side session."""
     session.pop('logged_in')
     return redirect(url_for('login'))
 
 @app.route('/', methods=['POST', 'GET'])
 @login_required
 def home():
-
+	"""If request is post process task form, else render board page with a random quote."""
     if request.method == 'POST':
     	# Create task dictonary, grab name, desc and value from form
     	# Auto generate the status as incomplete and the datetime
@@ -156,18 +158,21 @@ def home():
 @app.route('/about')
 @login_required
 def about():
+	"""Render about page."""
     return render_template('about.html', title='Todo - About')
 
 
 @app.route('/features')
 @login_required
 def features():
+	"""Render features page."""
     return render_template('features.html', title='Todo - Features')
 
 
 @app.route('/members')
 @login_required
 def members():
+	"""Query all members and render them as cards."""
     data = mongo.db.todo.find()
     return render_template('members.html', data=data, title='Todo - Members')
 
