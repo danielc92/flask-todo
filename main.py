@@ -46,6 +46,7 @@ def hash_password(password, salt):
 
 # Login Required function
 def login_required(f):
+	"""Check if user has been logged in, else redirect them to login route."""
     @wraps(f)
     def wrap(*args, **kwargs):
         if 'logged_in' in session:
@@ -58,7 +59,7 @@ def login_required(f):
 # Main routes
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-    if request.method=='POST':
+    if request.method == 'POST':
         # Reset error
         error = None
 
@@ -142,6 +143,8 @@ def home():
         task['value'] = request.form.get('task-value')
         task['status'] = 'incomplete'
         task['date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        # Push task using session as unique id
         mongo.db.todo.update({'email':session['logged_in']}, {'$push': {'tasks': task}})
         return redirect(url_for('home'))
     else:
@@ -149,26 +152,24 @@ def home():
         quote = choice(quotes)
         return render_template('board.html', quote=quote, title='Todo - Board', data=data)
 
+
 @app.route('/about')
 @login_required
 def about():
     return render_template('about.html', title='Todo - About')
+
 
 @app.route('/features')
 @login_required
 def features():
     return render_template('features.html', title='Todo - Features')
 
+
 @app.route('/members')
 @login_required
 def members():
     data = mongo.db.todo.find()
     return render_template('members.html', data=data, title='Todo - Members')
-
-# Test routes
-@app.route('/query-users')
-def qusers():
-    return 'users query'
 
 
 if __name__ == '__main__':
