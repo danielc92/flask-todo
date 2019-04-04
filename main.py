@@ -16,7 +16,7 @@ mongo = PyMongo(app)
 # Load quote data
 with open('./quotes.json', 'r') as f:
     quotes = json.load(f)
-print(quotes)
+
 
 # Drop the database
 # mongo.db.todo.drop()
@@ -134,9 +134,12 @@ def logout():
 def home():
 
     if request.method == 'POST':
+    	# Create task dictonary, grab name, desc and value from form
+    	# Auto generate the status as incomplete and the datetime
         task = dict()
         task['name'] = request.form.get('task-name')
         task['desc'] = request.form.get('task-desc')
+        task['value'] = request.form.get('task-value')
         task['status'] = 'incomplete'
         task['date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         mongo.db.todo.update({'email':session['logged_in']}, {'$push': {'tasks': task}})
