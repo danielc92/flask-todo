@@ -1,46 +1,54 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <section class="section">
-	<section class="container">
-		<article class="content">
-		<section class="columns">
-			<div class="column">
-				<h2>Welcome to the Board Page!</h2>
-				<p>In this page you are able to:</p>
-				<ul>
-					<li>Track your tasks</li>
-					<li>Create new tasks via the form</li>
-				</ul>
-			</div>
-			<div class="column">
-				<h2>Add a Task</h2>
-				<form class="form" method="post">
-	<div class="field">
-							<input required name="task-name" type="text" class="input" placeholder="Important Meeting"></input>
-				</div><div class="field">
-							<input required name="task-desc" type="text" class="input" placeholder="Discuss bar chart to stakeholders."></input>
-						</div><div class="field">
-							<button class="button is-primary">Add</button></div>
-					
-			</form>
-			</div>
-		</section>
-			<h2>Your tasks</h2>
-			{% if 'tasks' in data.keys() %}
-				{% for d in data['tasks'] %}
-					<article class="notification is-link">
-						<div class="content">
-							<h1 class="has-text-white">{{ d['name'] }}</h1>
-							<p>{{ d['desc'] }}</p>
-							<p>Added: <span class="code">{{ d['date'] }}</span></p>
-							<p class="tag is-dark">{{ d['status'] }}</p>
-						</div>
-					</article>
-				{% endfor %}
-			{% endif %}
-
-		</article>
-	</section>
+    <section class="container">
+        <article class="content">
+            <section class="columns">
+                <div class="column">
+                    <h1>Board Page</h1>
+                    <p>Monitor, create and modify your tasks. Aim to increase productivity.</p>
+                </div>
+                <div class="column">
+                    <article class="message">
+                        <div class="message-header">Some inspiration</div>
+                        <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua.
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                    </article>
+                </div>
+            </section>
+            <section class="columns">
+                <div class="column">
+                    <h2>Create a task</h2>
+                    <form class="form" method="post">
+                        <div class="field">
+                            <input required name="task-name" type="text" class="input" placeholder="Important Meeting"></input>
+                        </div>
+                        <div class="field">
+                            <input required name="task-desc" type="text" class="input" placeholder="Discuss bar chart to stakeholders."></input>
+                        </div>
+                        <div class="field">
+                            <button class="button is-primary">Create task</button></div>
+                    </form>
+                </div>
+                <div class="column">
+                </div>
+            </section>
+            <h2>Your tasks</h2>
+            {% if 'tasks' in data.keys() %}
+            {% for d in data['tasks'] %}
+            <article class="notification is-link">
+                <div class="content">
+                    <h1 class="has-text-white">{{ d['name'] }}</h1>
+                    <p>{{ d['desc'] }}</p>
+                    <p>Added: <span class="code">{{ d['date'] }}</span></p>
+                    <p class="tag is-dark">{{ d['status'] }}</p>
+                </div>
+            </article>
+            {% endfor %}
+            {% endif %}
+        </article>
+    </section>
 </section>
 {% endblock %}
