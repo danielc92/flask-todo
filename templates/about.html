@@ -5,19 +5,38 @@
 	<section class="container">
 		<article class="content is-medium">
 			<h1>About Page</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<h3>Purpose of this application</h3>
+			<p>This application was built to experiment with the interaction between a NOSQL database and a dynamic web application. Previously I've built web applications using a relational database backend and wanted to get a feel architecting and building around a NOSQL system.</p>
+			<p>I also wanted to build this tool with the aim of boosting productivity for those who wish to use it. This can be done through simplficiation of an agile-esque workflow, simple task/card system and easy to use GUI.</p>
+			<p>NOSQL has some notable advantages over SQL, in that it:</p>
+			<ul>
+				<li>Scales well horizontally.</li>
+				<li>Relies on a document style system, similar to hashtable structure. This means that little to no transforming needs to be done in between reading and rendering data.</li>
+				<li>Need for complex joins are eliminated.</li>
+				<li>Faster development time.</li>
+			</ul>
+			<a href="{{ url_for('home') }}" class="button is-primary is-medium">Task Board</a>
 
+			<h3>Building</h3>
+			<p>This application uses a mixture of different frameworks and technologies.</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr><td>Backend</td><td class="code has-text-info">Python 3.6.5</td></tr>
+					<tr><td>Frontend CSS Framework</td><td class="code has-text-info">Bulma 0.6.2</td></tr>
+					<tr><td>Web Framework</td><td class="code has-text-info">Flask 1.0.2</td></tr>
+					<tr><td>Database</td><td class="code has-text-info">MongoDB 4.0.3</td></tr>
+					<tr><td>Environment</td><td class="code has-text-info">MacOSX</td></tr>
+					<tr><td>Version Control</td><td class="code has-text-info">Github</td></tr>
+				</tbody>
+			</table>
+			
+			
 		</article>
 		
 

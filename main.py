@@ -142,6 +142,11 @@ def home():
 def about():
     return render_template('about.html', title='Todo - About')
 
+@app.route('/features')
+@login_required
+def features():
+    return render_template('features.html', title='Todo - Features')
+
 @app.route('/members')
 @login_required
 def members():
