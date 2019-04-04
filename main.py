@@ -46,7 +46,7 @@ def hash_password(password, salt):
 
 # Login Required function
 def login_required(f):
-	"""Check if user has been logged in, else redirect them to login route."""
+    """Check if user has been logged in, else redirect them to login route."""
     @wraps(f)
     def wrap(*args, **kwargs):
         if 'logged_in' in session:
@@ -59,15 +59,15 @@ def login_required(f):
 # Main routes
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-	"""If request method is POST, process registration form, otherwise render form again."""
+    """If request method is POST, process registration form, otherwise render form again."""
     if request.method == 'POST':
         # Reset error
         error = None
 
         # Gather Register Details
         data = dict()
-        data['name'] = request.form.get('reg-name')
-        data['email'] = request.form.get('reg-email')
+        data['name'] = request.form.get('reg-name').lower()
+        data['email'] = request.form.get('reg-email').lower()
         data['password'] = request.form.get('reg-password')
         data['confirm-password'] = request.form.get('reg-confirm-password')
         data['dob'] = request.form.get('reg-dob')
@@ -102,16 +102,18 @@ def login():
     if request.method == 'POST':
         error = None
         # Gather login details
-        login = dict()
-        login['email'] = request.form.get('log-email')
-        login['password'] = request.form.get('log-password')
+        data = dict()
+        data['email'] = request.form.get('log-email').lower()
+        data['password'] = request.form.get('log-password')
 
         # Validate credentials
-        if mongo.db.todo.find({'email': login['email']}).count() > 0:
-            record = mongo.db.todo.find({'email': login['email']})[0]
-            hashed_login_password = hash_password(login['password'], salt=app.config['SALT'])
-            if record['password'] == hashed_login_password:
-                session['logged_in'] = login['email']
+        if mongo.db.todo.find({'email': data['email']}).count() > 0:
+
+            record = mongo.db.todo.find({'email': data['email']})[0]
+            password = hash_password(data['password'], salt=app.config['SALT'])
+            
+            if record['password'] == password:
+                session['logged_in'] = data['email']
                 return redirect(url_for('home'))
             else:
                 error = 'Incorrect Credentials.'
@@ -128,17 +130,17 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
-	"""Logout a user by clearing their server side session."""
+    """Logout a user by clearing their server side session."""
     session.pop('logged_in')
     return redirect(url_for('login'))
 
 @app.route('/', methods=['POST', 'GET'])
 @login_required
 def home():
-	"""If request is post process task form, else render board page with a random quote."""
+    """If request is post process task form, else render board page with a random quote."""
     if request.method == 'POST':
-    	# Create task dictonary, grab name, desc and value from form
-    	# Auto generate the status as incomplete and the datetime
+        # Create task dictonary, grab name, desc and value from form
+        # Auto generate the status as incomplete and the datetime
         task = dict()
         task['name'] = request.form.get('task-name')
         task['desc'] = request.form.get('task-desc')
@@ -158,24 +160,24 @@ def home():
 @app.route('/about')
 @login_required
 def about():
-	"""Render about page."""
+    """Render about page."""
     return render_template('about.html', title='Todo - About')
 
 
 @app.route('/features')
 @login_required
 def features():
-	"""Render features page."""
+    """Render features page."""
     return render_template('features.html', title='Todo - Features')
 
 
 @app.route('/members')
 @login_required
 def members():
-	"""Query all members and render them as cards."""
+    """Query all members and render them as cards."""
     data = mongo.db.todo.find()
     return render_template('members.html', data=data, title='Todo - Members')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
