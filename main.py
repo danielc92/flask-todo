@@ -3,12 +3,20 @@ from flask_pymongo import PyMongo
 import hashlib
 from functools import wraps
 from datetime import datetime
+import json
+from random import choice
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'top-secret'
 app.config['SALT'] = 'salty'
 app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
 mongo = PyMongo(app)
+
+
+# Load quote data
+with open('./quotes.json', 'r') as f:
+    quotes = json.load(f)
+print(quotes)
 
 # Drop the database
 # mongo.db.todo.drop()
@@ -135,7 +143,8 @@ def home():
         return redirect(url_for('home'))
     else:
         data = mongo.db.todo.find({'email':session['logged_in']})[0]
-        return render_template('board.html', title='Todo - Board', data=data)
+        quote = choice(quotes)
+        return render_template('board.html', quote=quote, title='Todo - Board', data=data)
 
 @app.route('/about')
 @login_required
