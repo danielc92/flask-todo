@@ -16,7 +16,7 @@
             </section>
             <section class="columns">
                 <div class="column">
-                    <h2>Create a task</h2>
+                    <h3>Create a task</h3>
                     <form class="form" method="post">
                         <div class="field">
                             <label class="label">Name</label>
@@ -37,16 +37,20 @@
                 <div class="column">
                 </div>
             </section>
+
+            <h1 id="piles">Piles</h1>
+
+
             <section class="columns">
                 <article class="column">
-                    <h2>Unfinished Tasks</h2>
+                    <h3>Todo Pile</h3>
                     {% if 'tasks' in data.keys() %}
                         {% for d in data['tasks'] %}
                             {% if d['status'] == 'incomplete' %}
                                 <article class="notification is-danger">
                                     <div class="content">
                                         {% include 'task-template.html' %}
-                                        <p><a class="is-fullwidth button is-dark is-normal" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">Mask this task as complete</a></p>
+                                        <p><a class="is-fullwidth button is-dark is-normal" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">Mark this task as complete</a></p>
                                     </div>
                                 </article>
                             {% endif %}
@@ -54,7 +58,7 @@
                     {% endif %}
                 </article>
                 <article class="column">
-                    <h2>Finished Tasks</h2>
+                    <h3>Finished Pile</h3>
                     {% if 'tasks' in data.keys() %}
                         {% for d in data['tasks'] %}
                             {% if d['status'] == 'complete' %}
