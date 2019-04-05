@@ -1,8 +1,14 @@
 <h1 class="has-text-white">{{ d['name'] }}</h1>
 
-<p>{{ d['desc'] }}</p>
+<p><strong>{{ d['desc'] }}</strong> This task is important because <strong>{{ d['value'] }}</strong></p>
 
-<p>This task is important because {{ d['value'] }}</p>
+<p>
+	<span class="icon">
+        <i class="fas fa-clock"></i>
+    </span> 
+    <span class="code">{{ d['status'] }}</span>
+</p>
+
 
 <p>
 	<span class="icon">
@@ -18,5 +24,3 @@
     </span> 
     <span class="code">{{ d['uuid'] }}</span>
 </p>
-
-<p>Status: <span class="tag is-light">{{ d['status'] }}</span></p>
