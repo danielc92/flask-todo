@@ -111,7 +111,7 @@ def login():
 
             record = mongo.db.todo.find({'email': data['email']})[0]
             password = hash_password(data['password'], salt=app.config['SALT'])
-            
+
             if record['password'] == password:
                 session['logged_in'] = data['email']
                 return redirect(url_for('home'))

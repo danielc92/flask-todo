@@ -53,3 +53,4 @@ The following tests have been successfully completed.
 - [Bulma Documentation](https://bulma.io/)
 - [Flask Documentation](http://flask.pocoo.org/)
 - [MongoDB Manual](https://docs.mongodb.com/manual/introduction/)
+- [Updating nested arrays in MongoDB](https://www.mattburkedev.com/updating-inside-a-nested-array-with-the-mongodb-positional-operator-in-c-number/)
