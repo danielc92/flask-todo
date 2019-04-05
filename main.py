@@ -5,6 +5,7 @@ from functools import wraps
 from datetime import datetime
 import json
 from random import choice
+from uuid import uuid4
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'top-secret'
@@ -20,6 +21,7 @@ with open('./quotes.json', 'r') as f:
 
 # Drop the database
 # mongo.db.todo.drop()
+
 
 """
 Form Metadata
@@ -42,6 +44,9 @@ Login
 def hash_password(password, salt):
     hashed = hashlib.sha512((password + salt).encode('utf-8')).hexdigest()
     return hashed
+
+def return_uuid():
+    return str(uuid4())
 
 
 # Login Required function
@@ -145,6 +150,8 @@ def home():
         task['name'] = request.form.get('task-name')
         task['desc'] = request.form.get('task-desc')
         task['value'] = request.form.get('task-value')
+
+        task['uuid'] = return_uuid()
         task['status'] = 'incomplete'
         task['date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -162,6 +169,19 @@ def home():
 def about():
     """Render about page."""
     return render_template('about.html', title='Todo - About')
+
+
+@app.route('/task-update')
+@login_required
+def update_task():
+    uuid = request.args.get('uuid')
+    status = request.args.get('status')
+
+    mongo.db.todo.update({'email': session['logged_in'], 
+                          'tasks':{ '$elemMatch':{'uuid': uuid}}},
+                         {'$set': {'tasks.$.status': status}})
+
+    return redirect(url_for('home'))
 
 
 @app.route('/features')
