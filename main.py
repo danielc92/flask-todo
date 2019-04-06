@@ -14,7 +14,7 @@ app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
 mongo = PyMongo(app)
 
 # Drop the database
-mongo.db.todo.drop()
+# mongo.db.todo.drop()
 
 # Load quote data
 with open('./quotes.json', 'r') as f:
