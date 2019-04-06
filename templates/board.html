@@ -47,7 +47,7 @@
                     {% if 'tasks' in data.keys() %}
                         {% for d in data['tasks'] %}
                             {% if d['status'] == 'incomplete' %}
-                                <article class="notification is-danger">
+                                <article class="notification is-link">
                                     <div class="content">
                                         {% include 'task-template.html' %}
                                         <p><a class="is-fullwidth button is-dark is-normal" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">Mark this task as complete</a></p>

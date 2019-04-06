@@ -13,14 +13,12 @@ app.config['SALT'] = 'salty'
 app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
 mongo = PyMongo(app)
 
+# Drop the database
+# mongo.db.todo.drop()
 
 # Load quote data
 with open('./quotes.json', 'r') as f:
     quotes = json.load(f)
-
-
-# Drop the database
-# mongo.db.todo.drop()
 
 
 """
@@ -48,6 +46,11 @@ def hash_password(password, salt):
 def return_uuid():
     return str(uuid4())
 
+def return_date(include_time=False):
+    if include_time is True:
+        return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        return datetime.now().strftime('%Y-%m-%d')
 
 # Login Required function
 def login_required(f):
@@ -90,7 +93,7 @@ def register():
         else:
             # Redirect to login page if successful.
             data.pop('confirm-password')
-            data['register-date'] = datetime.now().strftime('%Y-%m-%d')
+            data['register-date'] = return_date()
             data['password'] = hash_password(data['password'], salt=app.config['SALT'])
             mongo.db.todo.insert_one(data)
             return redirect(url_for('login'))
@@ -144,16 +147,16 @@ def logout():
 def home():
     """If request is post process task form, else render board page with a random quote."""
     if request.method == 'POST':
-        # Create task dictonary, grab name, desc and value from form
-        # Auto generate the status as incomplete and the datetime
+        # Create task dictonary. Pull name, description and value from user input.
         task = dict()
         task['name'] = request.form.get('task-name')
         task['desc'] = request.form.get('task-desc')
         task['value'] = request.form.get('task-value')
 
+        # Auto-create uuid, status and date created for the user.
         task['uuid'] = return_uuid()
         task['status'] = 'incomplete'
-        task['date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        task['date-created'] = return_date(include_time=True)
 
         # Push task using session as unique id
         mongo.db.todo.update({'email':session['logged_in']}, {'$push': {'tasks': task}})
@@ -179,7 +182,8 @@ def update_task():
 
     mongo.db.todo.update({'email': session['logged_in'], 
                           'tasks':{ '$elemMatch':{'uuid': uuid}}},
-                         {'$set': {'tasks.$.status': status}})
+                         {'$set': {'tasks.$.status': status, 
+                         'tasks.$.date-completed':return_date(include_time=True)}})
 
     return redirect(url_for('home'))
 
