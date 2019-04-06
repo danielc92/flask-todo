@@ -1,9 +1,9 @@
 <article class="content is-normal">
-    <h2>{{ d['name'] }}</h2>
+    <h4>{{ d['name'] }}</h4>
 
-    <p class="is-size-5"><strong>{{ d['desc'] }}</strong> This task is important because <strong>{{ d['value'] }}</strong></p>
+    <p class=""><strong>{{ d['desc'] }}</strong> This task is important because <strong>{{ d['value'] }}</strong></p>
 
-    <p>
+    <p class="help">
         <span class="icon">
             <i class="fas fa-clock"></i>
         </span> 
@@ -11,7 +11,7 @@
     </p>
 
     {% if d['date-completed'] %}
-    <p>
+    <p class="help">
         <span class="icon">
             <i class="fas fa-stopwatch"></i>
         </span> 
@@ -19,7 +19,7 @@
     </p>
     {% endif %}
 
-    <p>
+    <p class="help">
         <span class="icon">
             <i class="fas fa-key"></i>
         </span> 
