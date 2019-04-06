@@ -164,7 +164,7 @@ def home():
         # Push task using session as unique id
         mongo.db.todo.update({'email': session['logged_in']}, {'$push': {'tasks': task}})
 
-        return redirect(url_for('home'))
+        return redirect(url_for('home', _anchor='piles'))
 
     else:
 
@@ -201,7 +201,7 @@ def update_task():
                          {'$set': {'tasks.$.status': status, 
                          'tasks.$.date-completed':return_date(include_time=True)}})
 
-    return redirect(url_for('home'))
+    return redirect(url_for('home', _anchor="piles"))
 
 
 @app.route('/features')
