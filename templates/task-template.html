@@ -1,30 +1,28 @@
-<h1 class="has-text-white">{{ d['name'] }}</h1>
+<article class="content is-normal">
+    <h2>{{ d['name'] }}</h2>
 
-<p><strong>{{ d['desc'] }}</strong> This task is important because <strong>{{ d['value'] }}</strong></p>
+    <p class="is-size-5"><strong>{{ d['desc'] }}</strong> This task is important because <strong>{{ d['value'] }}</strong></p>
 
-<p>
-    <span class="icon">
-        <i class="fas fa-check-square"></i>
-    </span> 
-    <span class="code">{{ d['status'] }}</span>
-</p>
-<p>
-    <span class="icon">
-        <i class="fas fa-clock"></i>
-    </span> 
-    <span class="code">{{ d['date-created'] }}</span>
-</p>
-{% if d['date-completed'] %}
-<p>
-    <span class="icon">
-        <i class="fas fa-stopwatch"></i>
-    </span> 
-    <span class="code">{{ d['date-completed'] }}</span>
-</p>
-{% endif %}
-<p>
-    <span class="icon">
-        <i class="fas fa-key"></i>
-    </span> 
-    <span class="code">{{ d['uuid'] }}</span>
-</p>
+    <p>
+        <span class="icon">
+            <i class="fas fa-clock"></i>
+        </span> 
+        <span class="code">{{ d['date-created'] }}</span>
+    </p>
+
+    {% if d['date-completed'] %}
+    <p>
+        <span class="icon">
+            <i class="fas fa-stopwatch"></i>
+        </span> 
+        <span class="code">{{ d['date-completed'] }}</span>
+    </p>
+    {% endif %}
+
+    <p>
+        <span class="icon">
+            <i class="fas fa-key"></i>
+        </span> 
+        <span class="code">{{ d['uuid'] }}</span>
+    </p>
+</article>

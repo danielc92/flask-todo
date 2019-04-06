@@ -43,14 +43,14 @@
 
             <section class="columns">
                 <article class="column">
-                    <h3>Todo Pile</h3>
+                    <h3>In Progress</h3>
                     {% if 'tasks' in data.keys() %}
                         {% for d in data['tasks'] %}
                             {% if d['status'] == 'incomplete' %}
-                                <article class="notification is-link">
-                                    <div class="content">
+                                <article class="message is-info">
+                                    <div class="message-body">
                                         {% include 'task-template.html' %}
-                                        <p><a class="is-fullwidth button is-dark is-normal" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">Mark this task as complete</a></p>
+                                        <p><a class="is-fullwidth button is-link is-normal" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">Mark this task as complete</a></p>
                                     </div>
                                 </article>
                             {% endif %}
@@ -58,12 +58,12 @@
                     {% endif %}
                 </article>
                 <article class="column">
-                    <h3>Finished Pile</h3>
+                    <h3>Finished</h3>
                     {% if 'tasks' in data.keys() %}
                         {% for d in data['tasks'] %}
                             {% if d['status'] == 'complete' %}
-                                <article class="notification is-success">
-                                    <div class="content">
+                                <article class="message is-primary">
+                                    <div class="message-body">
                                         {% include 'task-template.html' %}
                                     </div>
                                 </article>
