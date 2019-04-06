@@ -14,7 +14,7 @@ app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
 mongo = PyMongo(app)
 
 # Drop the database
-# mongo.db.todo.drop()
+mongo.db.todo.drop()
 
 # Load quote data
 with open('./quotes.json', 'r') as f:
@@ -95,6 +95,7 @@ def register():
             data.pop('confirm-password')
             data['register-date'] = return_date()
             data['password'] = hash_password(data['password'], salt=app.config['SALT'])
+            data['tasks'] = []
             mongo.db.todo.insert_one(data)
             return redirect(url_for('login'))
 
@@ -142,11 +143,13 @@ def logout():
     session.pop('logged_in')
     return redirect(url_for('login'))
 
+@app.route('/home', methods=['POST', 'GET'])
 @app.route('/', methods=['POST', 'GET'])
 @login_required
 def home():
     """If request is post process task form, else render board page with a random quote."""
     if request.method == 'POST':
+
         # Create task dictonary. Pull name, description and value from user input.
         task = dict()
         task['name'] = request.form.get('task-name')
@@ -159,12 +162,25 @@ def home():
         task['date-created'] = return_date(include_time=True)
 
         # Push task using session as unique id
-        mongo.db.todo.update({'email':session['logged_in']}, {'$push': {'tasks': task}})
+        mongo.db.todo.update({'email': session['logged_in']}, {'$push': {'tasks': task}})
+
         return redirect(url_for('home'))
+
     else:
-        data = mongo.db.todo.find({'email':session['logged_in']})[0]
+
+        # Store task data on user level
+        data = mongo.db.todo.find({'email': session['logged_in']})[0]
+        tasks = data['tasks']
+        tasks_complete = [t for t in tasks if t['status'] == 'complete']
+        tasks_incomplete = [t for t in tasks if t['status'] == 'incomplete']
+
+        # Generate a random quote
         quote = choice(quotes)
-        return render_template('board.html', quote=quote, title='Todo - Board', data=data)
+        return render_template('board.html',
+                               quote=quote,
+                               title='Todo - Board',
+                               tasks_complete=tasks_complete,
+                               tasks_incomplete=tasks_incomplete)
 
 
 @app.route('/about')
