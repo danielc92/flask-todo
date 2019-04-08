@@ -97,7 +97,6 @@ def register():
         data['email'] = request.form.get('reg-email').lower()
         data['password'] = request.form.get('reg-password')
         data['confirm-password'] = request.form.get('reg-confirm-password')
-        data['dob'] = request.form.get('reg-dob')
 
         # Validation rounds
         if data['password'] != data['confirm-password']:
