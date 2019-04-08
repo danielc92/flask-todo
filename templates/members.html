@@ -14,8 +14,7 @@
                         <article class="content">
                             <h2>{{ d['name'] }}</h2>
                             <p><span><i class="fas fa-envelope"></i></span> <span class="code">{{ d['email'] }}</span></p>
-                            <p><span><i class="fas fa-birthday-cake"></i></span> <span class="code">{{ d['dob'] }}</span></p>
-                            <p><span><i class="fas fa-calendar-alt"></i></span> <span class="code">{{ d['register-date'] }}</span></p>
+                            <p><span><i class="fas fa-calendar-alt"></i></span> <span class="code">{{ d['register-date']|timestamp_to_datetime }}</span></p>
                         </article>
                     </div>
                 </article>

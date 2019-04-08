@@ -1,3 +1,4 @@
+""" IMPORTS """
 from flask import Flask, redirect, flash, request, url_for, session, render_template, jsonify
 from flask_pymongo import PyMongo
 import hashlib
@@ -7,7 +8,47 @@ import json
 from random import choice
 from uuid import uuid4
 
+
+""" HELPER FUNCTIONS """
+
+def hash_password(password, salt):
+    """Return hashed SHA512 password, given password and salt."""
+    hashed = hashlib.sha512((password + salt).encode('utf-8')).hexdigest()
+    return hashed
+
+
+def return_uuid():
+    """Return a unique code."""
+    return str(uuid4())
+
+
+def return_timestamp():
+    """Return timestamp from the current datetime."""
+    now = datetime.now()
+    stamp = datetime.timestamp(now)
+    return stamp
+
+def timestamp_to_datetime(stamp, format_code='%Y-%b-%d'):
+
+    """Return string formatted datetime from timestamp object, given a format_code."""
+    datetime_ = datetime.fromtimestamp(stamp)
+    formatted = datetime_.strftime(format_code)
+    return formatted
+
+# Login Required function
+def login_required(f):
+    """Check if user has been logged in, else redirect them to login route."""
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect(url_for('login'))
+    return wrap
+
+
 app = Flask(__name__)
+app.jinja_env.filters['timestamp_to_datetime'] = timestamp_to_datetime
 app.config['SECRET_KEY'] = 'top-secret'
 app.config['SALT'] = 'salty'
 app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
@@ -25,44 +66,22 @@ with open('./quotes.json', 'r') as f:
 Form Metadata
 
 Register
-* reg-name
-* reg-email
-* reg-password
-* reg-confirm-password
-* reg-dob
+* reg-name : 'the full name of applicant'
+* reg-email : 'the email address of applicant/username'
+* reg-password : 'the password'
+* reg-confirm : password 'confirmation password above'
+* reg-dob : 'date of birth of applicant'
 
 Login
-* log-email
-* log-password
-
+* log-email : 'email used to register'
+* log-password : 'password used to register'
 """
 
 
-# Hashing function for raw passwords
-def hash_password(password, salt):
-    hashed = hashlib.sha512((password + salt).encode('utf-8')).hexdigest()
-    return hashed
 
-def return_uuid():
-    return str(uuid4())
 
-def return_date(include_time=False):
-    if include_time is True:
-        return datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    else:
-        return datetime.now().strftime('%Y-%m-%d')
 
-# Login Required function
-def login_required(f):
-    """Check if user has been logged in, else redirect them to login route."""
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            return redirect(url_for('login'))
-    return wrap
-
+""" ROUTES """
 
 # Main routes
 @app.route('/register', methods=['POST', 'GET'])
@@ -93,7 +112,7 @@ def register():
         else:
             # Redirect to login page if successful.
             data.pop('confirm-password')
-            data['register-date'] = return_date()
+            data['register-date'] = return_timestamp()
             data['password'] = hash_password(data['password'], salt=app.config['SALT'])
             data['tasks'] = []
             mongo.db.todo.insert_one(data)
@@ -159,7 +178,7 @@ def home():
         # Auto-create uuid, status and date created for the user.
         task['uuid'] = return_uuid()
         task['status'] = 'incomplete'
-        task['date-created'] = return_date(include_time=True)
+        task['date-created'] = return_timestamp()
 
         # Push task using session as unique id
         mongo.db.todo.update({'email': session['logged_in']}, {'$push': {'tasks': task}})
@@ -199,7 +218,7 @@ def update_task():
     mongo.db.todo.update({'email': session['logged_in'], 
                           'tasks':{ '$elemMatch':{'uuid': uuid}}},
                          {'$set': {'tasks.$.status': status, 
-                         'tasks.$.date-completed':return_date(include_time=True)}})
+                         'tasks.$.date-completed': return_timestamp()}})
 
     return redirect(url_for('home', _anchor="piles"))
 
