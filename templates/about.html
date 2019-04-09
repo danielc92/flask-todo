@@ -1,45 +1,65 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <section class="section">
-	<section class="container">
-		<article class="content">
-			<h1>About Page</h1>
-			<h3>Purpose of this application</h3>
-			<p>This application was built to experiment with the interaction between a NOSQL database and a dynamic web application. Previously I've built web applications using a relational database backend and wanted to get a feel architecting and building around a NOSQL system.</p>
-			<p>I also wanted to build this tool with the aim of boosting productivity for those who wish to use it. This can be done through simplficiation of an agile-esque workflow, simple task/card system and easy to use GUI.</p>
-			<p>NOSQL has some notable advantages over SQL, in that it:</p>
-			<ul>
-				<li>Scales well horizontally.</li>
-				<li>Relies on a document style system, similar to hashtable structure. This means that little to no transforming needs to be done in between reading and rendering data.</li>
-				<li>Need for complex joins are eliminated.</li>
-				<li>Faster development time.</li>
-			</ul>
-			<a href="{{ url_for('home') }}" class="button is-primary is-medium">Task Board</a>
-
-			<h3>Application Details</h3>
-			<p>This application uses a mixture of different frameworks and technologies.</p>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Type</th>
-						<th>Name</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr><td>Backend</td><td class="code has-text-info">Python 3.6.5</td></tr>
-					<tr><td>Frontend CSS Framework</td><td class="code has-text-info">Bulma 0.6.2</td></tr>
-					<tr><td>Web Framework</td><td class="code has-text-info">Flask 1.0.2</td></tr>
-					<tr><td>Database</td><td class="code has-text-info">MongoDB 4.0.3</td></tr>
-					<tr><td>Environment</td><td class="code has-text-info">MacOSX</td></tr>
-					<tr><td>Version Control</td><td class="code has-text-info">Github</td></tr>
-				</tbody>
-			</table>
-			
-			
-		</article>
-		
-
-	</section>
+    <section class="container">
+        <article class="content">
+            <h1>About Page</h1>
+            <h3>Summary</h3>
+            <p>This application is another one of my side projects, it is essentially a task management productivity tool. It was built to experiment with interactions between a NOSQL database and a dynamic web application. Previously, I've built web applications using a relational database backend and wanted to get a feel architecting and building an application depending on a NOSQL backend. This application simplifies the process of working on projects/tasks so that the user has more time to get things done, while minimizing </p>
+            <p>NOSQL has some notable advantages over SQL, in that it:</p>
+            <ul>
+                <li>Scales well horizontally.</li>
+                <li>Relies on a document style system, similar to hashtable structure. This means that little to no transforming needs to be done in between reading and rendering data.</li>
+                <li>Need for complex joins are eliminated.</li>
+                <li>Faster development time.</li>
+            </ul>
+            <a href="{{ url_for('home') }}" class="button is-primary is-medium">Task Board</a>
+            <h3>Application Details</h3>
+            <p>This application uses a mixture of different frameworks and technologies.</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Backend</td>
+                        <td class="code has-text-info">Python 3.6.5</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend CSS Framework</td>
+                        <td class="code has-text-info">Bulma 0.6.2</td>
+                    </tr>
+                    <tr>
+                        <td>Web Framework</td>
+                        <td class="code has-text-info">Flask 1.0.2</td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td class="code has-text-info">MongoDB 4.0.3</td>
+                    </tr>
+                    <tr>
+                        <td>Environment</td>
+                        <td class="code has-text-info">MacOSX</td>
+                    </tr>
+                    <tr>
+                        <td>Version Control</td>
+                        <td class="code has-text-info">Github</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Routes</h3>
+            <p>Listed below are the routes included in this application. All routes except for <span class="tag">/login</span> and <span class="tag">/register</span> are protected and cannot be accessed unless user is authenticated with valid credentials.</p>
+            <ul>
+                <li><span class="tag">/home</span> or <span class="tag">/</span> - Allows registered members to create, view and manage tasks.</li>
+                <li><span class="tag">/login</span> - Members can login to the application here.</li>
+                <li><span class="tag">/register</span> - New members can sign up an account here.</li>
+                <li><span class="tag">/members</span> - Lists all registered members.</li>
+                <li><span class="tag">/features</span> - Lists features available and to be built out in the future.</li>
+            </ul>
+        </article>
+    </section>
 </section>
 {% endblock %}
