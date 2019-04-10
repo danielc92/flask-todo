@@ -52,6 +52,23 @@
                     </form>
 
                 </article>
+
+                <article class="column">
+                    <h3>Blocked</h3>
+                        {% if tasks_blocked|length < 1 %}
+                        <p>You have no blocked tasks.</p>
+                        {% endif %}
+
+                        {% for d in tasks_blocked %}
+                                <article class="message is-danger">
+                                    <div class="message-body">
+                                        {% include 'task-template.html' %}
+                                        <p><a class="is-fullwidth button is-danger is-small" href="{{ url_for('update_task', status='incomplete', uuid=d['uuid']) }}">Start working on this</a></p>
+                                    </div>
+                                </article>
+                        {% endfor %}
+                </article>
+
                 <article class="column">
                     <h3>In Progress</h3>
                         {% if tasks_incomplete|length < 1 %}
@@ -62,7 +79,8 @@
                                 <article class="message is-info">
                                     <div class="message-body">
                                         {% include 'task-template.html' %}
-                                        <p><a class="is-fullwidth button is-link is-normal" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">Mark this task as complete</a></p>
+                                        <p><a class="is-fullwidth button is-link is-small" href="{{ url_for('update_task', status='blocked', uuid=d['uuid']) }}">This task is blocked</a></p>
+                                        <p><a class="is-fullwidth is-small button is-link" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">This task is complete</a></p>
                                     </div>
                                 </article>
                         {% endfor %}

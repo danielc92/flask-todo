@@ -189,8 +189,10 @@ def home():
         # Store task data on user level
         data = mongo.db.todo.find({'email': session['logged_in']})[0]
         tasks = data['tasks']
+
         tasks_complete = [t for t in tasks if t['status'] == 'complete']
         tasks_incomplete = [t for t in tasks if t['status'] == 'incomplete']
+        tasks_blocked = [t for t in tasks if t['status'] == 'blocked']
 
         # Generate a random quote
         quote = choice(quotes)
@@ -198,7 +200,8 @@ def home():
                                quote=quote,
                                title='Todo - Board',
                                tasks_complete=tasks_complete,
-                               tasks_incomplete=tasks_incomplete)
+                               tasks_incomplete=tasks_incomplete,
+                               tasks_blocked=tasks_blocked)
 
 
 @app.route('/about')
