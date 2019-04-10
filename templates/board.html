@@ -12,37 +12,22 @@
 
             <section class="columns">
                 {% set tasks_total = tasks_complete|length + tasks_incomplete|length%}
-                <article class="column">
-                    <div style="height:100%;" class="notification is-primary has-text-centered">
-                        <h1 class="has-text-white">{{ tasks_complete|length }}</h1>
-                        <p>Completed Tasks</p>
-                    </div>      
-                </article>
+                {% set stats = [{'Completed Tasks': tasks_complete|length},
+                                {'Incomplete Tasks': tasks_incomplete|length},
+                                {'Total Tasks': tasks_total},
+                                {'Completion Rate':'{0:0.0%}'.format(tasks_complete|length / tasks_total)}] %}
+                {{ data }}
 
+                {% for s in stats %}
+                {% for k, v in s.items() %}
                 <article class="column">
                     <div style="height:100%;" class="notification is-primary has-text-centered">
-                        <h1 class="has-text-white">{{ tasks_incomplete|length }}</h1>
-                        <p>Incomplete Tasks</p>
+                        <h1 class="has-text-white">{{ v }}</h1>
+                        <p>{{ k }}</p>
                     </div>      
                 </article>
-
-                <article class="column">
-                    <div style="height:100%;" class="notification is-primary has-text-centered">
-                        <h1 class="has-text-white">{{ tasks_total }}</h1>
-                        <p>Total Tasks</p>
-                    </div>      
-                </article>
-
-                <article class="column">
-                    <div style="height:100%;" class="notification is-primary has-text-centered">
-                        {% if tasks_total == 0 %}
-                            <h1 class="has-text-white">-</h1>
-                        {% else %}
-                            <h1 class="has-text-white">{{ '{0:0.0%}'.format(tasks_complete|length / tasks_total) }}</h1>
-                        {% endif %}
-                        <p>Completion Rate</p>
-                    </div>      
-                </article>
+                {% endfor %}
+                {% endfor %}
             </section>
             
             <h1 id="piles">Workflow</h1>
