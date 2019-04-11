@@ -217,10 +217,13 @@ def update_task():
     uuid = request.args.get('uuid')
     status = request.args.get('status')
 
-    mongo.db.todo.update({'email': session['logged_in'], 
-                          'tasks':{ '$elemMatch':{'uuid': uuid}}},
-                         {'$set': {'tasks.$.status': status, 
-                         'tasks.$.date-completed': return_timestamp()}})
+    # If they complete task, set the timestamp for completion
+    if status == 'complete':
+        mongo.db.todo.update({'email': session['logged_in'], 'tasks':{ '$elemMatch':{'uuid': uuid}}},
+                             {'$set': {'tasks.$.status': status, 'tasks.$.date-completed': return_timestamp()}})
+    else:
+        mongo.db.todo.update({'email': session['logged_in'], 'tasks':{ '$elemMatch':{'uuid': uuid}}},
+                             {'$set': {'tasks.$.status': status}})
 
     return redirect(url_for('home', _anchor="piles"))
 
