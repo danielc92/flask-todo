@@ -1,7 +1,15 @@
 <article class="content is-normal">
-    <h4>{{ d['name'] }}</h4>
-
+    <div class="columns">
+        <div class="column">
+            <h4>{{ d['name'] }}</h4>
+        </div>
+        <div class="column has-text-right">
+            <a href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" class="delete" aria-label="delete"></a>
+        </div>
+    </div>
+    
     <p class=""><strong>{{ d['desc'] }}</strong> This task is important because <strong>{{ d['value'] }}</strong></p>
+
 
     <p class="help">
         <span class="icon">
@@ -25,4 +33,6 @@
         </span> 
         <span class="code">{{ d['uuid'] }}</span>
     </p>
+
+
 </article>

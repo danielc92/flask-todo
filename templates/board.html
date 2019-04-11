@@ -12,10 +12,17 @@
 
             <section class="columns">
                 {% set tasks_total = tasks_complete|length + tasks_incomplete|length%}
+                
+                {% if tasks_total == 0 %}
+                    {% set completion_rate = 0 %}
+                {% else %}
+                    {% set completion_rate = (tasks_complete|length / tasks_total) %}
+                {% endif %}
+                
                 {% set stats = [{'Completed Tasks': tasks_complete|length},
                                 {'Incomplete Tasks': tasks_incomplete|length},
                                 {'Total Tasks': tasks_total},
-                                {'Completion Rate':'{0:0.0%}'.format(tasks_complete|length / tasks_total)}] %}
+                                {'Completion Rate': '{0:0.0%}'.format(completion_rate)}] %}
                 {{ data }}
 
                 {% for s in stats %}
