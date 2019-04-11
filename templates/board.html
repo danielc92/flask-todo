@@ -11,7 +11,7 @@
                 </article>
 
             <section class="columns">
-                {% set tasks_total = tasks_complete|length + tasks_incomplete|length%}
+                {% set tasks_total = tasks_complete|length + tasks_incomplete|length + tasks_blocked|length%}
                 
                 {% if tasks_total == 0 %}
                     {% set completion_rate = 0 %}
@@ -20,7 +20,7 @@
                 {% endif %}
                 
                 {% set stats = [{'Completed Tasks': tasks_complete|length},
-                                {'Incomplete Tasks': tasks_incomplete|length},
+                                {'Incomplete Tasks': tasks_incomplete|length + tasks_blocked|length},
                                 {'Total Tasks': tasks_total},
                                 {'Completion Rate': '{0:0.0%}'.format(completion_rate)}] %}
                 {{ data }}
@@ -61,7 +61,7 @@
                 </article>
 
                 <article class="column">
-                    <h3>Blocked</h3>
+                    <h3>Blocked ({{ tasks_blocked|length }})</h3>
                         {% if tasks_blocked|length < 1 %}
                         <p>You have no blocked tasks.</p>
                         {% endif %}
@@ -77,7 +77,7 @@
                 </article>
 
                 <article class="column">
-                    <h3>In Progress</h3>
+                    <h3>In Progress ({{ tasks_incomplete|length }})</h3>
                         {% if tasks_incomplete|length < 1 %}
                         <p>You have no tasks, you can create one in the left panel.</p>
                         {% endif %}
@@ -93,7 +93,7 @@
                         {% endfor %}
                 </article>
                 <article class="column">
-                    <h3>Finished</h3>
+                    <h3>Finished ({{ tasks_complete|length }})</h3>
                         
                         {% if tasks_complete|length < 1 %}
                             <p>You have not completed any tasks so far.</p>
