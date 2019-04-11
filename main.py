@@ -188,7 +188,7 @@ def home():
 
         # Store task data on user level
         data = mongo.db.todo.find({'email': session['logged_in']})[0]
-        tasks = [t for t in data['tasks'] if t['status'] in ['completed', 'blocked', 'incomplete']]
+        tasks = [t for t in data['tasks'] if t['status'] in ['complete', 'blocked', 'incomplete']]
         print(tasks)
         tasks_complete = [t for t in tasks if t['status'] == 'complete']
         tasks_incomplete = [t for t in tasks if t['status'] == 'incomplete']
