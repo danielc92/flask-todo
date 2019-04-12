@@ -41,6 +41,7 @@
             <section class="columns">
                 <article class="column">
                     <h3>Create a task</h3>
+
                     <form class="form" method="post">
                         <div class="field">
                             <label class="label">Name</label>
@@ -68,9 +69,13 @@
 
                         {% for d in tasks_blocked %}
                                 <article class="message is-danger">
+                                    <div class="message-header">
+                                            <p class="is-marginless">{{ d['name'] }}</p>
+                                            <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a>
+                                          </div>
                                     <div class="message-body">
                                         {% include 'task-template.html' %}
-                                        <p><a class="is-fullwidth button is-danger is-small" href="{{ url_for('update_task', status='incomplete', uuid=d['uuid']) }}">Start working on this</a></p>
+                                        <p><a class="is-fullwidth is-outlined button is-danger is-small" href="{{ url_for('update_task', status='incomplete', uuid=d['uuid']) }}">Start working on this</a></p>
                                     </div>
                                 </article>
                         {% endfor %}
@@ -84,10 +89,14 @@
 
                         {% for d in tasks_incomplete %}
                                 <article class="message is-info">
+                                    <div class="message-header">
+                                            <p class="is-marginless">{{ d['name'] }}</p>
+                                            <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a>
+                                          </div>
                                     <div class="message-body">
                                         {% include 'task-template.html' %}
-                                        <p><a class="is-fullwidth button is-link is-small" href="{{ url_for('update_task', status='blocked', uuid=d['uuid']) }}">This task is blocked</a></p>
-                                        <p><a class="is-fullwidth is-small button is-link" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">This task is complete</a></p>
+                                        <p><a class="is-fullwidth button is-link is-outlined is-small" href="{{ url_for('update_task', status='blocked', uuid=d['uuid']) }}">This task is blocked</a></p>
+                                        <p><a class="is-outlined is-fullwidth is-small button is-link" href="{{ url_for('update_task', status='complete', uuid=d['uuid']) }}">This task is complete</a></p>
                                     </div>
                                 </article>
                         {% endfor %}
@@ -101,6 +110,10 @@
 
                         {% for d in tasks_complete %}
                                 <article class="message is-primary">
+                                    <div class="message-header">
+                                            <p class="is-marginless">{{ d['name'] }}</p>
+                                            <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a>
+                                          </div>
                                     <div class="message-body">
                                         {% include 'task-template.html' %}
                                     </div>
