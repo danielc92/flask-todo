@@ -3,7 +3,7 @@
 <section class="section">
     <section class="container">
         <article class="content">
-            <h1>Dashboard</h1>
+            <h1 class="cf-one">Dashboard</h1>
 
                 <p>Monitor your progress, view workflow stats, create and manage your tasks.</p>
                 <article class="message is-warning">
@@ -28,19 +28,23 @@
                 {% for s in stats %}
                 {% for k, v in s.items() %}
                 <article class="column">
-                    <div style="height:100%;" class="notification is-primary has-text-centered">
-                        <h1 class="has-text-white">{{ v }}</h1>
+                    <div style="height:100%;" class="card is-white has-text-centered">
+                        <div class="card-content">
+                            <h1 class="cf-one">{{ v }}</h1>
                         <p>{{ k }}</p>
+
+                        </div>
+                        
                     </div>      
                 </article>
                 {% endfor %}
                 {% endfor %}
             </section>
             
-            <h1 id="piles">Workflow</h1>
+            <h1 class="cf-one" id="piles">Workflow</h1>
             <section class="columns">
                 <article class="column">
-                    <h3>Create a task</h3>
+                    <h5 class="cf-one">Create a task</h5>
 
                     <form class="form" method="post">
                         <div class="field">
@@ -62,7 +66,7 @@
                 </article>
 
                 <article class="column">
-                    <h3>Blocked ({{ tasks_blocked|length }})</h3>
+                    <h5 class="cf-one">Blocked ({{ tasks_blocked|length }})</h5>
                         {% if tasks_blocked|length < 1 %}
                         <p>You have no blocked tasks.</p>
                         {% endif %}
@@ -70,7 +74,7 @@
                         {% for d in tasks_blocked %}
                                 <article class="message is-danger">
                                     <div class="message-header">
-                                            <p class="is-marginless">{{ d['name'] }}</p>
+                                            <p class="is-marginless cf-one">{{ d['name'] }}</p>
                                             <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a>
                                           </div>
                                     <div class="message-body">
@@ -82,7 +86,7 @@
                 </article>
 
                 <article class="column">
-                    <h3>In Progress ({{ tasks_incomplete|length }})</h3>
+                    <h5 class="cf-one">In Progress ({{ tasks_incomplete|length }})</h5>
                         {% if tasks_incomplete|length < 1 %}
                         <p>You have no tasks, you can create one in the left panel.</p>
                         {% endif %}
@@ -90,7 +94,7 @@
                         {% for d in tasks_incomplete %}
                                 <article class="message is-info">
                                     <div class="message-header">
-                                            <p class="is-marginless">{{ d['name'] }}</p>
+                                            <p class="is-marginless cf-one">{{ d['name'] }}</p>
                                             <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a>
                                           </div>
                                     <div class="message-body">
@@ -102,7 +106,7 @@
                         {% endfor %}
                 </article>
                 <article class="column">
-                    <h3>Finished ({{ tasks_complete|length }})</h3>
+                    <h5 class="cf-one">Finished ({{ tasks_complete|length }})</h5>
                         
                         {% if tasks_complete|length < 1 %}
                             <p>You have not completed any tasks so far.</p>
@@ -111,7 +115,7 @@
                         {% for d in tasks_complete %}
                                 <article class="message is-primary">
                                     <div class="message-header">
-                                            <p class="is-marginless">{{ d['name'] }}</p>
+                                            <p class="is-marginless cf-one">{{ d['name'] }}</p>
                                             <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a>
                                           </div>
                                     <div class="message-body">

@@ -5,9 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <style type="text/css">
+        .cf-one {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .underline-hover:hover {
+            font-weight: bold;
+
+        }
+
+    </style>
     <!--script type="text/javascript" src="{{ url_for('static', filename='font-awesome-v5.0.7.js') }}"></script-->
 </head>
 
@@ -25,17 +38,17 @@
                 </div>
             </div>
             <div id="navMenuColordark-example" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item" href="{{ url_for('home') }}">
+                <div class="navbar-start cf-one">
+                    <a class="navbar-item underline-hover" href="{{ url_for('home') }}">
                         Dashboard
                     </a>
-                    <a class="navbar-item" href="{{ url_for('members') }}">
+                    <a class="navbar-item underline-hover" href="{{ url_for('members') }}">
                         Members
                     </a>
-                    <a class="navbar-item" href="{{ url_for('about') }}">
+                    <a class="navbar-item underline-hover" href="{{ url_for('about') }}">
                         About
                     </a>
-                    <a class="navbar-item" href="{{ url_for('features') }}">
+                    <a class="navbar-item underline-hover" href="{{ url_for('features') }}">
                         Features
                     </a>
                 </div>
