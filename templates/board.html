@@ -71,7 +71,33 @@
                         <p>You have no blocked tasks.</p>
                         {% endif %}
 
+                        {% set t = tasks_blocked[0] %}
+                        <article class="card" style="margin-bottom: 2rem;">
+                            <div class="card-header">
+                                <div class="card-header-title">
+                                    <p class="cf-one">{{ t['name'] }}</p>
+                                </div>
+                                <div class="card-header-icon"><a class="delete" href="" aria-label="delete"></a> </div>
+                            </div>
+                            
+                                <div class="card-content">
+                                    
+                                    
+                                    <p>{{ t['desc'] }} <strong> this is important because </strong>{{ t['value'] }}</p>
+
+                                     <p class="help">
+                                        <span class="icon">
+                                            <i class="fas fa-clock"></i>
+                                        </span> 
+                                        <span class="code">{{ t['date-created']|timestamp_to_datetime(format_code='%d-%b-%Y %H:%M%p') }}</span>
+                                    </p>
+
+                                </div>
+                        </article>
+
                         {% for d in tasks_blocked %}
+
+
                                 <article class="message is-danger">
                                     <div class="message-header">
                                             <p class="is-marginless cf-one">{{ d['name'] }}</p>
@@ -80,6 +106,29 @@
                                     <div class="message-body">
                                         {% include 'task-template.html' %}
                                         <p><a class="is-fullwidth is-outlined button is-danger is-small" href="{{ url_for('update_task', status='incomplete', uuid=d['uuid']) }}">Start working on this</a></p>
+
+                                        <p class="help">
+                                            <span class="icon">
+                                                <i class="fas fa-clock"></i>
+                                            </span> 
+                                            <span class="code">{{ d['date-created']|timestamp_to_datetime(format_code='%d-%b-%Y %H:%M%p') }}</span>
+                                        </p>
+
+                                        {% if d['date-completed'] %}
+                                        <p class="help">
+                                            <span class="icon">
+                                                <i class="fas fa-stopwatch"></i>
+                                            </span> 
+                                            <span class="code">{{ d['date-completed']|timestamp_to_datetime(format_code='%d-%b-%Y %H:%M%p') }}</span>
+                                        </p>
+                                        {% endif %}
+
+                                        <p class="help">
+                                            <span class="icon">
+                                                <i class="fas fa-key"></i>
+                                            </span> 
+                                            <span class="code">{{ d['uuid'] }}</span>
+                                        </p>
                                     </div>
                                 </article>
                         {% endfor %}
