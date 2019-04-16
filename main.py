@@ -59,7 +59,11 @@ mongo = PyMongo(app)
 
 # Load quote data
 with open('./quotes.json', 'r') as f:
+
     quotes = json.load(f)
+
+# Generate a random quote
+quote = choice(quotes)
 
 
 """
@@ -194,8 +198,6 @@ def home():
         tasks_incomplete = [t for t in tasks if t['status'] == 'incomplete']
         tasks_blocked = [t for t in tasks if t['status'] == 'blocked']
 
-        # Generate a random quote
-        quote = choice(quotes)
         return render_template('board.html',
                                quote=quote,
                                title='Todo - Board',
