@@ -28,7 +28,7 @@
                 {% for s in stats %}
                 {% for k, v in s.items() %}
                 <article class="column">
-                    <div style="height:100%;" class="card has-background-link has-text-white has-text-centered">
+                    <div style="height:100%;" class="card move-up has-background-link has-text-white has-text-centered">
                         <div class="card-content">
                             <h1 class="cf-one has-text-white">{{ v }}</h1>
                         <p>{{ k }}</p>
@@ -72,7 +72,7 @@
                         {% endif %}
 
                         {% for d in tasks_blocked %}
-                                <article class="notification has-background-danger has-text-white">
+                                <article class="notification move-up has-background-danger has-text-white">
                                     {% include 'task-template.html' %}
                                 </article>
                         {% endfor %}
@@ -85,7 +85,7 @@
                         {% endif %}
 
                         {% for d in tasks_incomplete %}
-                                 <article class="notification has-background-link has-text-white">
+                                 <article class="notification move-up has-background-link has-text-white">
                                     {% include 'task-template.html' %}
                                 </article>
                         {% endfor %}
@@ -98,7 +98,7 @@
                         {% endif %}
 
                         {% for d in tasks_complete %}
-                                <article class="notification has-background-success has-text-white">
+                                <article class="notification move-up has-background-success has-text-white">
                                     {% include 'task-template.html' %}
                                 </article>
                         {% endfor %}
