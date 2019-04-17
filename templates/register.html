@@ -6,7 +6,7 @@
 		<section class="column is-two-fifths">
 		<article class="content">
 			<h1 class="cf-one">Registration Page</h1>
-			<p class="help">Fill in your details below and press register button to submit.</p>
+			<p class="help">Fill in your details below and press register button to submit. You email address will be used as your <strong>login username.</strong></p>
 			<form class="form" method="POST">
 				
 
@@ -33,8 +33,15 @@
 				    <input required class="input is-info" type="password" placeholder="Enter password again..." name="reg-confirm-password">
 				  </div>
 
-				  <div class="field"><button class="button is-primary" role="submit">Register</button>
-</div>
+				  <div class="field">
+				  	<label class="label">Interests</label>
+				  	<textarea required class="textarea" placeholder="Enter a few words about yourself, hobbies, interests etc." name="about-yourself"></textarea>
+
+
+				  </div>
+
+				  <div class="field"><button class="button is-medium is-outlined is-success" role="submit">Register</button>
+				  </div>
 				  
 				  {% if error %}
 				  <code>{{ error }}</code>

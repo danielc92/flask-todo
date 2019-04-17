@@ -101,7 +101,7 @@ def register():
         data['email'] = request.form.get('reg-email').lower()
         data['password'] = request.form.get('reg-password')
         data['confirm-password'] = request.form.get('reg-confirm-password')
-
+        data['about-yourself'] = request.form.get('about-yourself')
         # Validation rounds
         if data['password'] != data['confirm-password']:
             error = 'Passwords must match.'
