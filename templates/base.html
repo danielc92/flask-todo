@@ -26,7 +26,7 @@
         }
         
         .underline-hover:hover {
-            font-weight: bold;
+            text-decoration: underline;
 
         }
 
@@ -58,16 +58,21 @@
             <div id="navMenuColordark-example" class="navbar-menu">
                 <div class="navbar-start cf-one">
                     <a class="navbar-item underline-hover" href="{{ url_for('home') }}">
-                        Dashboard
+                        <span class="icon is-medium"><i class="fas fa-tasks fa-lg"></i>
+</span>
+                        <span>Dashboard</span>
                     </a>
                     <a class="navbar-item underline-hover" href="{{ url_for('members') }}">
-                        Members
+                        <span class="icon is-medium"><i class="fas fa-users fa-lg"></i></span>
+                        <span>Members</span>
                     </a>
                     <a class="navbar-item underline-hover" href="{{ url_for('about') }}">
-                        About
+                        <span class="icon is-medium"><i class="fas fa-info-circle fa-lg"></i></span><span>About</span>
+                        
                     </a>
                     <a class="navbar-item underline-hover" href="{{ url_for('features') }}">
-                        Features
+                        <span class="icon is-medium"><i class="fas fa-box-open fa-lg"></i>
+</span><span>Features</span>
                     </a>
                 </div>
                 <div class="navbar-end">
@@ -111,8 +116,12 @@
             </div>
         </section>
     </nav>
+
+
     {% block content %}
     {% endblock content %}
+
+
     <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', () => {
 
