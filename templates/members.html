@@ -9,14 +9,12 @@
         <section class="columns is-multiline">
             {% for d in data %}
             <div class="column is-half">
-                <article class="message is-primary">
-                    <div class="message-body">
+                <article class="notification has-text-white move-up has-background-link">
                         <article class="content">
-                            <h2>{{ d['name'] }}</h2>
+                            <h2 class="has-text-white cf-one">{{ d['name'] }}</h2>
                             <p><span><i class="fas fa-envelope"></i></span> <span class="code">{{ d['email'] }}</span></p>
                             <p><span><i class="fas fa-calendar-alt"></i></span> <span class="code">{{ d['register-date']|timestamp_to_datetime }}</span></p>
                         </article>
-                    </div>
                 </article>
             </div>
             {% endfor %}

@@ -121,8 +121,6 @@ def register():
             mongo.db.todo.insert_one(data)
             return redirect(url_for('login'))
 
-        # Print inputs
-        print(data)
         return render_template('register.html', title='Todo - Register Page')
     else:
         return render_template('register.html', title='Todo - Register Page')
@@ -193,7 +191,7 @@ def home():
         # Store task data on user level
         data = mongo.db.todo.find({'email': session['logged_in']})[0]
         tasks = [t for t in data['tasks'] if t['status'] in ['complete', 'blocked', 'incomplete']]
-        print(tasks)
+
         tasks_complete = [t for t in tasks if t['status'] == 'complete']
         tasks_incomplete = [t for t in tasks if t['status'] == 'incomplete']
         tasks_blocked = [t for t in tasks if t['status'] == 'blocked']
