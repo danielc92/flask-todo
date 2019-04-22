@@ -7,7 +7,7 @@ from datetime import datetime
 import json
 from random import choice
 from uuid import uuid4
-
+import os
 
 """ HELPER FUNCTIONS """
 
@@ -51,7 +51,8 @@ app = Flask(__name__)
 app.jinja_env.filters['timestamp_to_datetime'] = timestamp_to_datetime
 app.config['SECRET_KEY'] = 'top-secret'
 app.config['SALT'] = 'salty'
-app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
+app.config['MONGO_URI'] = os.getenv("mongouri") or "mongodb://localhost:27017/todoDB"
+print(app.config['MONGO_URI'][:12])
 mongo = PyMongo(app)
 
 # Drop the database
