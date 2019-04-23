@@ -8,56 +8,51 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-
-<link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='favicon/apple-icon-57x57.png' )}}">
-<link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='favicon/apple-icon-60x60.png' )}}">
-<link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='favicon/apple-icon-72x72.png' )}}">
-<link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='favicon/apple-icon-76x76.png' )}}">
-<link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='favicon/apple-icon-114x114.png' )}}">
-<link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='favicon/apple-icon-120x120.png' )}}">
-<link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='favicon/apple-icon-144x144.png' )}}">
-<link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='favicon/apple-icon-152x152.png' )}}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-icon-180x180.png' )}}">
-<link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='favicon/android-icon-192x192.png' )}}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png' )}}">
-<link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon/favicon-96x96.png' )}}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png' )}}">
-<link rel="manifest" href="{{ url_for('static', filename='favicon/manifest.json' )}}">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="{{ url_for('static', filename='favicon/ms-icon-144x144.png')}}">
-<meta name="theme-color" content="#ffffff">
-
-
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='favicon/apple-icon-57x57.png' )}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='favicon/apple-icon-60x60.png' )}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='favicon/apple-icon-72x72.png' )}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='favicon/apple-icon-76x76.png' )}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='favicon/apple-icon-114x114.png' )}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='favicon/apple-icon-120x120.png' )}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='favicon/apple-icon-144x144.png' )}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='favicon/apple-icon-152x152.png' )}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-icon-180x180.png' )}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='favicon/android-icon-192x192.png' )}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png' )}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon/favicon-96x96.png' )}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png' )}}">
+    <link rel="manifest" href="{{ url_for('static', filename='favicon/manifest.json' )}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='favicon/ms-icon-144x144.png')}}">
+    <meta name="theme-color" content="#ffffff">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-
     <style type="text/css">
-        .cf-one {
-            font-family: 'Roboto Mono', monospace;
-        }
+    .cf-one {
+        font-family: 'Roboto Mono', monospace;
+    }
 
-        .move-up {
-            position: relative;
-            transition: top ease 0.24s;
-            top:0;
-        }
+    .move-up {
+        position: relative;
+        transition: top ease 0.24s;
+        top: 0;
+    }
 
-        .move-up:hover {
-            top: -9px;
-        }
-        
-        .underline-hover:hover {
-            text-decoration: underline;
+    .move-up:hover {
+        top: -9px;
+    }
 
-        }
+    .underline-hover:hover {
+        text-decoration: underline;
 
-        .notification {
-            padding: 1.2rem;
-        }
+    }
 
-        .icon {
-            font-size: .8rem;
-        }
+    .notification {
+        padding: 1.2rem;
+    }
 
+    .icon {
+        font-size: .8rem;
+    }
     </style>
     <!--script type="text/javascript" src="{{ url_for('static', filename='font-awesome-v5.0.7.js') }}"></script-->
 </head>
@@ -67,7 +62,7 @@
         <section class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="{{ url_for('home') }}">
-                    <img src="{{ url_for('static', filename='logo/todo-white-concertone.png') }}" alt="Daniel Corcorans TODO application">
+                    <img style="max-height: 2rem;" src="{{ url_for('static', filename='logo/todo-white-concertone.png') }}" alt="Daniel Corcorans TODO application">
                 </a>
                 <div class="navbar-burger burger" data-target="navMenuColordark-example">
                     <span></span>
@@ -79,7 +74,7 @@
                 <div class="navbar-start cf-one">
                     <a class="navbar-item underline-hover" href="{{ url_for('home') }}">
                         <span class="icon is-medium"><i class="fas fa-tasks fa-lg"></i>
-</span>
+                        </span>
                         <span>Dashboard</span>
                     </a>
                     <a class="navbar-item underline-hover" href="{{ url_for('members') }}">
@@ -88,11 +83,10 @@
                     </a>
                     <a class="navbar-item underline-hover" href="{{ url_for('about') }}">
                         <span class="icon is-medium"><i class="fas fa-info-circle fa-lg"></i></span><span>About</span>
-                        
                     </a>
                     <a class="navbar-item underline-hover" href="{{ url_for('features') }}">
                         <span class="icon is-medium"><i class="fas fa-box-open fa-lg"></i>
-</span><span>Features</span>
+                        </span><span>Features</span>
                     </a>
                 </div>
                 <div class="navbar-end">
@@ -136,12 +130,8 @@
             </div>
         </section>
     </nav>
-
-
     {% block content %}
     {% endblock content %}
-
-
     <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', () => {
 
