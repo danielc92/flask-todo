@@ -1,13 +1,11 @@
 """ IMPORTS """
 from flask import Flask, redirect, flash, request, url_for, session, render_template, jsonify
 from flask_pymongo import PyMongo
-import hashlib
 from functools import wraps
 from datetime import datetime
-import json
 from random import choice
 from uuid import uuid4
-import os
+import hashlib, json, os
 
 """ HELPER FUNCTIONS """
 
