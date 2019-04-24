@@ -15,6 +15,27 @@ def hash_password(password, salt):
     hashed = hashlib.sha512((password + salt).encode('utf-8')).hexdigest()
     return hashed
 
+def validate_password(password):
+    """Function to validate password."""
+
+    password = str(password)
+    error=None
+
+    valid_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*'
+
+    # First check length
+    length = len(password)
+    if 10<=length<=20:
+        # Second, check chars
+        for char in password:
+            if char not in valid_chars:
+                error=True
+                break
+    else:
+        error=True
+
+    return error 
+
 
 def return_uuid():
     """Return a unique code."""
@@ -111,6 +132,10 @@ def register():
         # Check if email exists in mongo db
         if mongo.db.todo.find({'email':data['email']}).count() > 0:
             error = 'Email already exists.'
+
+        # Validate the password with simple check
+        if validate_password(data['password']):
+            error = 'Passwords must be between 10-20 characters and can only contain a-z, A-Z, 0-9, !@#$%^&*.'
 
         if error:
             return render_template('register.html', error=error)
