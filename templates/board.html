@@ -4,48 +4,39 @@
     <section class="container">
         <article class="content">
             <h1 class="cf-one">Dashboard</h1>
-
-                <p>Monitor your progress, view workflow stats, create and manage your tasks.</p>
-                <article class="message is-warning">
-                    <div class="message-body is-italic">{{ quote['quote'] }} <strong> - {{ quote['name'] }}</strong></div>
-                </article>
-
+            <p>Monitor your progress, view workflow stats, create and manage your tasks.</p>
+            <article class="message is-warning">
+                <div class="message-body is-italic">{{ quote['quote'] }} <strong> - {{ quote['name'] }}</strong></div>
+            </article>
             <section class="columns">
                 {% set tasks_total = tasks_complete|length + tasks_incomplete|length + tasks_blocked|length%}
-                
                 {% if tasks_total == 0 %}
-                    {% set completion_rate = 0 %}
+                {% set completion_rate = 0 %}
                 {% else %}
-                    {% set completion_rate = (tasks_complete|length / tasks_total) %}
+                {% set completion_rate = (tasks_complete|length / tasks_total) %}
                 {% endif %}
-                
                 {% set stats = [{'Completed Tasks': tasks_complete|length},
-                                {'Incomplete Tasks': tasks_incomplete|length + tasks_blocked|length},
-                                {'Total Tasks': tasks_total},
-                                {'Completion Rate': '{0:0.0%}'.format(completion_rate)}] %}
+                {'Incomplete Tasks': tasks_incomplete|length + tasks_blocked|length},
+                {'Total Tasks': tasks_total},
+                {'Completion Rate': '{0:0.0%}'.format(completion_rate)}] %}
                 {{ data }}
-
                 {% for s in stats %}
                 {% for k, v in s.items() %}
                 <article class="column">
                     <div style="height:100%;" class="card move-up has-background-link has-text-white has-text-centered">
                         <div class="card-content">
                             <h1 class="cf-one has-text-white">{{ v }}</h1>
-                        <p>{{ k }}</p>
-
+                            <p>{{ k }}</p>
                         </div>
-                        
-                    </div>      
+                    </div>
                 </article>
                 {% endfor %}
                 {% endfor %}
             </section>
-            
             <h1 class="cf-one" id="piles">Workflow</h1>
             <section class="columns">
                 <article class="column">
                     <h5 class="cf-one">Create a task</h5>
-
                     <form class="form" method="post">
                         <div class="field">
                             <label class="label">Name</label>
@@ -62,45 +53,35 @@
                         <div class="field">
                             <button class="button is-success">Create task</button></div>
                     </form>
-
                 </article>
-
                 <article class="column">
                     <h5 class="cf-one">Blocked ({{ tasks_blocked|length }})</h5>
-                        {% if tasks_blocked|length < 1 %}
-                        <p>You have no blocked tasks.</p>
+                    {% if tasks_blocked|length < 1 %} <p>You have no blocked tasks.</p>
                         {% endif %}
-
                         {% for d in tasks_blocked %}
-                                <article class="notification move-up has-background-danger has-text-white">
-                                    {% include 'task-template.html' %}
-                                </article>
+                        <article class="notification move-up has-background-danger has-text-white">
+                            {% include 'task-template.html' %}
+                        </article>
                         {% endfor %}
                 </article>
-
                 <article class="column">
                     <h5 class="cf-one">In Progress ({{ tasks_incomplete|length }})</h5>
-                        {% if tasks_incomplete|length < 1 %}
-                        <p>You have no tasks, you can create one in the left panel.</p>
+                    {% if tasks_incomplete|length < 1 %} <p>You have no tasks, you can create one in the left panel.</p>
                         {% endif %}
-
                         {% for d in tasks_incomplete %}
-                                 <article class="notification move-up has-background-link has-text-white">
-                                    {% include 'task-template.html' %}
-                                </article>
+                        <article class="notification move-up has-background-link has-text-white">
+                            {% include 'task-template.html' %}
+                        </article>
                         {% endfor %}
                 </article>
                 <article class="column">
                     <h5 class="cf-one">Finished ({{ tasks_complete|length }})</h5>
-                        
-                        {% if tasks_complete|length < 1 %}
-                            <p>You have not completed any tasks so far.</p>
+                    {% if tasks_complete|length < 1 %} <p>You have not completed any tasks so far.</p>
                         {% endif %}
-
                         {% for d in tasks_complete %}
-                                <article class="notification move-up has-background-success has-text-white">
-                                    {% include 'task-template.html' %}
-                                </article>
+                        <article class="notification move-up has-background-success has-text-white">
+                            {% include 'task-template.html' %}
+                        </article>
                         {% endfor %}
                 </article>
             </section>

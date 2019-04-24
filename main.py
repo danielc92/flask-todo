@@ -7,6 +7,7 @@ from random import choice
 from uuid import uuid4
 import hashlib, json, os
 
+
 """ HELPER FUNCTIONS """
 
 def hash_password(password, salt):
@@ -49,7 +50,11 @@ app = Flask(__name__)
 app.jinja_env.filters['timestamp_to_datetime'] = timestamp_to_datetime
 app.config['SECRET_KEY'] = 'top-secret'
 app.config['SALT'] = 'salty'
-app.config['MONGO_URI'] = os.getenv("mongouri") or "mongodb://localhost:27017/todoDB"
+if app.config['ENV'] == 'testing':
+    app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
+else:
+    app.config['MONGO_URI'] = os.getenv('mongouri')
+
 print(app.config['MONGO_URI'][:12])
 mongo = PyMongo(app)
 
@@ -79,8 +84,6 @@ Login
 * log-email : 'email used to register'
 * log-password : 'password used to register'
 """
-
-
 
 
 
@@ -243,4 +246,4 @@ def members():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)

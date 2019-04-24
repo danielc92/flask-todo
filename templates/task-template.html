@@ -1,36 +1,29 @@
 <div class="content">
     <section class="columns is-vcentered" style="margin-bottom: 0;">
         <div class="column is-four-fifths">
-            <h5 class="cf-one has-text-white">{{ d['name'] }} </h5></div>
+            <h5 class="cf-one has-text-white">{{ d['name'] }} </h5>
+        </div>
         <div class="column has-text-right" style="padding-top: 0;">
             <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a></div>
     </section>
-
     <p>{{ d['desc'] }} <strong class="has-text-white"> , this is important because </strong>{{ d['value'] }}</p>
-
     {# STATS #}
-
     <p class="help">
         <span class="icon">
             <i class="fas fa-clock"></i>
         </span>
         <span class="code">{{ d['date-created']|timestamp_to_datetime(format_code='%d-%b-%Y %H:%M%p') }}</span>
     </p>
-
     {% if d['date-completed'] %}
-        <p class="help">
-            <span class="icon"><i class="fas fa-stopwatch"></i></span><span class="code">{{ d['date-completed']|timestamp_to_datetime(format_code='%d-%b-%Y %H:%M%p') }}</span></p>
+    <p class="help">
+        <span class="icon"><i class="fas fa-stopwatch"></i></span><span class="code">{{ d['date-completed']|timestamp_to_datetime(format_code='%d-%b-%Y %H:%M%p') }}</span></p>
     {% endif %}
-
     <p class="help"><span class="icon"><i class="fas fa-key"></i></span><span class="code">{{ d['uuid'][:12] }}...</span></p>
-
     {# BUTTONS #}
-
     {% if d['status'] == 'blocked' %}
-        <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='incomplete', uuid=d['uuid'])}}">Start working on this</a></p>
+    <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='incomplete', uuid=d['uuid'])}}">Start working on this</a></p>
     {% elif d['status'] == 'incomplete' %}
-        <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='blocked', uuid=d['uuid'])}}">This task is blocked</a></p>
-        <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='complete', uuid=d['uuid'])}}">This task is completed</a></p>
+    <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='blocked', uuid=d['uuid'])}}">This task is blocked</a></p>
+    <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='complete', uuid=d['uuid'])}}">This task is completed</a></p>
     {% endif %}
-
 </div>

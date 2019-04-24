@@ -1,55 +1,44 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <section class="section">
-	<section class="container">
-		<section class="column is-two-fifths">
-		<article class="content">
-			<h1 class="cf-one">Registration Page</h1>
-			<p class="help">Fill in your details below and press register button to submit. You email address will be used as your <strong>login username.</strong></p>
-			<form class="form" method="POST">
-				
-
-				  <!-- Full Name -->
-				  <div class="field">
-				  	<label class="label">Full Name</label>
-				    <input required class="input is-info" type="text" placeholder="Enter full name..." name="reg-name">
-				  </div>
-				  <!-- Email -->
-				  <div class="field">
-				  	<label class="label">Email</label>
-				    <input required class="input is-info" type="email" placeholder="Enter an email address..." name="reg-email">
-				  </div>
-
-				  <!-- Password -->
-				  <div class="field">
-				  	<label class="label">Password</label>
-				    <input required class="input is-info" type="password" placeholder="Enter password..." name="reg-password">
-				  </div>
-
-				  <!-- Confirm Password -->
-				  <div class="field">
-				  	<label class="label">Confirm Password</label>
-				    <input required class="input is-info" type="password" placeholder="Enter password again..." name="reg-confirm-password">
-				  </div>
-
-				  <div class="field">
-				  	<label class="label">Interests</label>
-				  	<textarea required class="textarea" placeholder="Enter a few words about yourself, hobbies, interests etc." name="about-yourself"></textarea>
-
-
-				  </div>
-
-				  <div class="field"><button class="button is-medium is-outlined is-success" role="submit">Register</button>
-				  </div>
-				  
-				  {% if error %}
-				  <code>{{ error }}</code>
-				  {% endif %}
-			</form>
-		</article>
-		
-</section>
-	</section>
+    <section class="container">
+        <section class="column is-two-fifths">
+            <article class="content">
+                <h1 class="cf-one">Registration Page</h1>
+                <p class="help">Fill in your details below and press register button to submit. You email address will be used as your <strong>login username.</strong></p>
+                <form class="form" method="POST">
+                    <!-- Full Name -->
+                    <div class="field">
+                        <label class="label">Full Name</label>
+                        <input required class="input is-info" type="text" placeholder="Enter full name..." name="reg-name">
+                    </div>
+                    <!-- Email -->
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <input required class="input is-info" type="email" placeholder="Enter an email address..." name="reg-email">
+                    </div>
+                    <!-- Password -->
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <input required class="input is-info" type="password" placeholder="Enter password..." name="reg-password">
+                    </div>
+                    <!-- Confirm Password -->
+                    <div class="field">
+                        <label class="label">Confirm Password</label>
+                        <input required class="input is-info" type="password" placeholder="Enter password again..." name="reg-confirm-password">
+                    </div>
+                    <div class="field">
+                        <label class="label">Interests</label>
+                        <textarea required class="textarea" placeholder="Enter a few words about yourself, hobbies, interests etc." name="about-yourself"></textarea>
+                    </div>
+                    <div class="field"><button class="button is-medium is-outlined is-success" role="submit">Register</button>
+                    </div>
+                    {% if error %}
+                    <code>{{ error }}</code>
+                    {% endif %}
+                </form>
+            </article>
+        </section>
+    </section>
 </section>
 {% endblock %}

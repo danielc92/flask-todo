@@ -1,42 +1,33 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <section class="section">
-	<section class="container">
-		<section class="column is-two-fifths">
-		<article class="content">
-			<h2 class="cf-one">Login Page</h2>
-			<p>Fill in your details below and press <strong>Login</strong> button to proceed.</p>
-			<form class="form" method="POST">
-
-
-				  <div class="field">
-				  	<label class="label">Email</label>
-				    <input required class="input is-info" type="text" placeholder="Enter email..." name="log-email">
-				  </div>
-
-				  <div class="field">
-				  	<label class="label">Password</label>
-				    <input required class="input is-info" type="password" placeholder="Enter password..." name="log-password">
-				  </div>
-				  <div class="field">
-				  	<p>Haven't got an account? Click <a href="{{ url_for('register') }}">here</a> to register an account.</p>
-
-				  </div>
-
-				  <div class="field">
-				  <button class="button is-primary" role="submit">Login</button>
-				  </div>
-						{% if error %}
-						<code>{{ error }}</code>
-						{% endif %}
-				</div>
-			</form>
-			
-		</article>
-
-		
-</section>
-	</section>
+    <section class="container">
+        <section class="column is-two-fifths">
+            <article class="content">
+                <h2 class="cf-one">Login Page</h2>
+                <p>Fill in your details below and press <strong>Login</strong> button to proceed.</p>
+                <form class="form" method="POST">
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <input required class="input is-info" type="text" placeholder="Enter email..." name="log-email">
+                    </div>
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <input required class="input is-info" type="password" placeholder="Enter password..." name="log-password">
+                    </div>
+                    <div class="field">
+                        <p>Haven't got an account? Click <a href="{{ url_for('register') }}">here</a> to register an account.</p>
+                    </div>
+                    <div class="field">
+                        <button class="button is-primary" role="submit">Login</button>
+                    </div>
+                    {% if error %}
+                    <code>{{ error }}</code>
+                    {% endif %}
+                    </div>
+                </form>
+            </article>
+        </section>
+    </section>
 </section>
 {% endblock %}

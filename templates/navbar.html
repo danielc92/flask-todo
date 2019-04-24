@@ -1,0 +1,72 @@
+<nav class="navbar is-link">
+    <section class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ url_for('home') }}">
+                <img style="max-height: 2rem;" src="{{ url_for('static', filename='logo/todo-white-concertone.png') }}" alt="Daniel Corcorans TODO application">
+            </a>
+            <div class="navbar-burger burger" data-target="navMenuColordark-example">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div id="navMenuColordark-example" class="navbar-menu">
+            <div class="navbar-start cf-one">
+                <a class="navbar-item underline-hover" href="{{ url_for('home') }}">
+                    <span class="icon is-medium"><i class="fas fa-tasks fa-lg"></i>
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="navbar-item underline-hover" href="{{ url_for('members') }}">
+                    <span class="icon is-medium"><i class="fas fa-users fa-lg"></i></span>
+                    <span>Members</span>
+                </a>
+                <a class="navbar-item underline-hover" href="{{ url_for('about') }}">
+                    <span class="icon is-medium"><i class="fas fa-info-circle fa-lg"></i></span><span>About</span>
+                </a>
+                <a class="navbar-item underline-hover" href="{{ url_for('features') }}">
+                    <span class="icon is-medium"><i class="fas fa-box-open fa-lg"></i>
+                    </span><span>Features</span>
+                </a>
+            </div>
+            <div class="navbar-end">
+                {% if session['logged_in'] %}
+                <div class="navbar-item has-text-white">
+                    <p class="help">Welcome back <span class="has-text-weight-semibold">{{ session['logged_in'] }}</span></p>
+                </div>
+                {% endif %}
+                <div class="navbar-item">
+                    <div class="field is-grouped">
+                        {% if session['logged_in'] %}
+                        <p class="control">
+                            <a class="button is-light" href="{{ url_for('logout') }}">
+                                <span class="icon">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </span>
+                                <span>Logout</span>
+                            </a>
+                        </p>
+                        {% else %}
+                        <p class="control">
+                            <a class="button is-light" href="{{ url_for('login') }}">
+                                <span class="icon">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </span>
+                                <span>Login</span>
+                            </a>
+                        </p>
+                        {% endif %}
+                        <p class="control">
+                            <a class="button is-light" href="{{ url_for('register') }}">
+                                <span class="icon">
+                                    <i class="fas fa-users"></i>
+                                </span>
+                                <span>Register</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</nav>
