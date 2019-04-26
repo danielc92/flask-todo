@@ -1,6 +1,7 @@
 """ IMPORTS """
 from flask import Flask, redirect, flash, request, url_for, session, render_template, jsonify
 from flask_pymongo import PyMongo
+from flask_recaptcha import ReCaptcha
 from functools import wraps
 from datetime import datetime
 from random import choice
@@ -71,6 +72,19 @@ app = Flask(__name__)
 app.jinja_env.filters['timestamp_to_datetime'] = timestamp_to_datetime
 app.config['SECRET_KEY'] = 'top-secret'
 app.config['SALT'] = 'salty'
+app.config['RECAPTCHA_ENABLED'] = True
+
+# Call recaptcha settings from environment variables
+app.config['RECAPTCHA_SITE_KEY'] = os.getenv('RECAP_SITE')
+app.config['RECAPTCHA_SECRET_KEY'] = os.getenv('RECAP_SECRET')
+
+# Initialize recaptcha instance providing site key, secret key and app instance
+recaptcha = ReCaptcha(app=app,
+                      secret_key=app.config['RECAPTCHA_SECRET_KEY'],
+                      site_key=app.config['RECAPTCHA_SITE_KEY'],
+                      is_enabled=app.config['RECAPTCHA_ENABLED'])
+
+
 if app.config['ENV'] == 'testing':
     app.config['MONGO_URI'] = "mongodb://localhost:27017/todoDB"
 else:
