@@ -39,7 +39,7 @@
                     <div class="field is-grouped">
                         {% if session['logged_in'] %}
                         <p class="control">
-                            <a class="button is-light" href="{{ url_for('logout') }}">
+                            <a class="button is-outlined is-light" href="{{ url_for('logout') }}">
                                 <span class="icon">
                                     <i class="fas fa-sign-in-alt"></i>
                                 </span>
@@ -48,7 +48,7 @@
                         </p>
                         {% else %}
                         <p class="control">
-                            <a class="button is-light" href="{{ url_for('login') }}">
+                            <a class="button is-outlined is-light" href="{{ url_for('login') }}">
                                 <span class="icon">
                                     <i class="fas fa-sign-in-alt"></i>
                                 </span>
@@ -57,7 +57,7 @@
                         </p>
                         {% endif %}
                         <p class="control">
-                            <a class="button is-light" href="{{ url_for('register') }}">
+                            <a class="button is-outlined is-light" href="{{ url_for('register') }}">
                                 <span class="icon">
                                     <i class="fas fa-users"></i>
                                 </span>

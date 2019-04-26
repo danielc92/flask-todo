@@ -17,10 +17,10 @@
                     </div>
                     <div class="field">
                         <p>Haven't got an account? Click <a href="{{ url_for('register') }}">here</a> to register an account.</p>
-                        <p>Dont want to register? You can login using the guest account <code class="has-text-success">guest@guest.com</code> / <code class="has-text-success">guest12345</code>.</p>
+                        <p>Dont want to register? You can login using the guest account <code class="has-text-info">guest@guest.com</code> / <code class="has-text-info">guest12345</code>.</p>
                     </div>
                     <div class="field">
-                        <button class="button is-primary" role="submit">Login</button>
+                        <button class="button is-success is-outlined is-medium" role="submit">Login</button>
                     </div>
                     {% if error %}
                     <code>{{ error }}</code>
