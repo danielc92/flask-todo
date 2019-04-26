@@ -35,7 +35,7 @@ def validate_password(password):
     else:
         error=True
 
-    return error 
+    return error
 
 
 def return_uuid():
@@ -188,8 +188,12 @@ def login():
             record = mongo.db.todo.find({'email': data['email']})[0]
             password = hash_password(data['password'], salt=app.config['SALT'])
 
+            # If the password is correct set the session and update last login
             if record['password'] == password:
                 session['logged_in'] = data['email']
+                last_login = return_timestamp()
+                mongo.db.todo.update({'email': session['logged_in']}, {'$set': {'last-login':last_login}})
+                print('Logged in as: ',session['logged_in'])
                 return redirect(url_for('home'))
             else:
                 error = 'Incorrect Credentials.'
