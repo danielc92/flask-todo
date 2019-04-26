@@ -15,10 +15,10 @@
                         <p class="is-italic">"{{ d['about-yourself'] }}"</p>
                         <p><span><i class="fas fa-envelope"></i></span> <span class="code">{{ d['email'] }}</span></p>
                         <p><span><i class="fas fa-calendar-alt"></i></span> <span class="code">{{ d['register-date']|timestamp_to_datetime }}</span></p>
-                        <!--
+
                         {% if d['last-login'] %}
-                            <p>Last logged in {{ d['last-login']|timestamp_to_datetime }}</p>
-                        {% endif %}-->
+                            <p>Last logged in {{ d['last-login']|timestamp_to_datetime(format_code='%Y-%b-%d %H:%M:%S') }}</p>
+                        {% endif %}
                     </article>
                 </article>
             </div>
