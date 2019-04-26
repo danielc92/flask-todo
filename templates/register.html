@@ -2,7 +2,7 @@
 {% block content %}
 <section class="section">
     <section class="container">
-        <section class="column is-two-fifths">
+        <section class="column is-half">
             <article class="content">
                 <h1 class="cf-one">Registration Page</h1>
                 <p class="help">Fill in your details below and press register button to submit. You email address will be used as your <strong>login username.</strong></p>
@@ -27,10 +27,16 @@
                         <label class="label">Confirm Password</label>
                         <input required class="input is-info" type="password" placeholder="Enter password again..." name="reg-confirm-password">
                     </div>
+                    <!--Interests-->
                     <div class="field">
                         <label class="label">Interests</label>
-                        <textarea required class="textarea" placeholder="Enter a few words about yourself, hobbies, interests etc." name="about-yourself"></textarea>
+                        <textarea required class="textarea" placeholder="Enter a few words about yourself, hobbies, interests etc." rows="2" name="about-yourself"></textarea>
                     </div>
+                    <!-- Google ReCaptcha -->
+                    <div class="field">
+                        <div class="g-recaptcha" data-sitekey="6Lc6O5oUAAAAAJU3VF4fZuQ1-HvXs6mODPsykQtv"></div>
+                    </div>
+                    <!-- Submit Button -->
                     <div class="field"><button class="button is-medium is-outlined is-success" role="submit">Register</button>
                     </div>
                     {% if error %}

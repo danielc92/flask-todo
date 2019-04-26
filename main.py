@@ -121,7 +121,6 @@ Login
 """
 
 
-
 """ ROUTES """
 
 # Main routes
@@ -132,37 +131,44 @@ def register():
         # Reset error
         error = None
 
-        # Gather Register Details
-        data = dict()
-        data['name'] = request.form.get('reg-name').lower()
-        data['email'] = request.form.get('reg-email').lower()
-        data['password'] = request.form.get('reg-password')
-        data['confirm-password'] = request.form.get('reg-confirm-password')
-        data['about-yourself'] = request.form.get('about-yourself')
-        # Validation rounds
-        if data['password'] != data['confirm-password']:
-            error = 'Passwords must match.'
+        if recaptcha.verify():
 
-        # Check if email exists in mongo db
-        if mongo.db.todo.find({'email':data['email']}).count() > 0:
-            error = 'Email already exists.'
+            # Gather Register Details
+            data = dict()
+            data['name'] = request.form.get('reg-name').lower()
+            data['email'] = request.form.get('reg-email').lower()
+            data['password'] = request.form.get('reg-password')
+            data['confirm-password'] = request.form.get('reg-confirm-password')
+            data['about-yourself'] = request.form.get('about-yourself')
 
-        # Validate the password with simple check
-        if validate_password(data['password']):
-            error = 'Passwords must be between 10-20 characters and can only contain a-z, A-Z, 0-9, !@#$%^&*.'
+            # Validation rounds
+            if data['password'] != data['confirm-password']:
+                error = 'Passwords must match.'
 
-        if error:
-            return render_template('register.html', error=error)
+            # Check if email exists in mongo db
+            if mongo.db.todo.find({'email':data['email']}).count() > 0:
+                error = 'Email already exists.'
+
+            # Validate the password with simple check
+            if validate_password(data['password']):
+                error = 'Passwords must be between 10-20 characters and can only contain a-z, A-Z, 0-9, !@#$%^&*.'
+
+            if error:
+                return render_template('register.html', error=error)
+            else:
+                # Redirect to login page if successful.
+                data.pop('confirm-password')
+                data['register-date'] = return_timestamp()
+                data['password'] = hash_password(data['password'], salt=app.config['SALT'])
+                data['tasks'] = []
+                mongo.db.todo.insert_one(data)
+                return redirect(url_for('login'))
+
+            return render_template('register.html', title='Todo - Register Page')
         else:
-            # Redirect to login page if successful.
-            data.pop('confirm-password')
-            data['register-date'] = return_timestamp()
-            data['password'] = hash_password(data['password'], salt=app.config['SALT'])
-            data['tasks'] = []
-            mongo.db.todo.insert_one(data)
-            return redirect(url_for('login'))
+            error = 'Captcha failed, try again.'
+            return render_template('register.html', title='Todo - Register Page', error=error)
 
-        return render_template('register.html', title='Todo - Register Page')
     else:
         return render_template('register.html', title='Todo - Register Page')
 
