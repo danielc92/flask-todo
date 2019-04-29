@@ -9,15 +9,22 @@
         <section class="columns is-multiline">
             {% for d in data %}
             <div class="column is-one-third">
-                <article class="notification has-text-white move-up has-background-link">
+                <article class="notification has-text-white move-up has-background-link" style="height: 100%;">
                     <article class="content">
                         <h2 class="has-text-white cf-one">{{ d['name'] }}</h2>
+                        
+                        <!-- Member about yourself details -->
                         <p class="is-italic">"{{ d['about-yourself'] }}"</p>
+                        
+                        <!-- Member email -->
                         <p><span><i class="fas fa-envelope"></i></span> <span class="code">{{ d['email'] }}</span></p>
+                        
+                        <!-- Member registration date -->
                         <p><span><i class="fas fa-calendar-alt"></i></span> <span class="code">{{ d['register-date']|timestamp_to_datetime }}</span></p>
 
+                        <!-- Check if member has a last logged in date and display -->
                         {% if d['last-login'] %}
-                            <p>Last logged in {{ d['last-login']|timestamp_to_datetime(format_code='%Y-%b-%d %H:%M:%S') }}</p>
+                            <p><span><i class="fas fa-history"></i></span> <span class="code">{{ d['last-login']|timestamp_to_datetime(format_code='%Y-%b-%d %H:%M:%S')}}</span></p>
                         {% endif %}
                     </article>
                 </article>
