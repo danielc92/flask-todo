@@ -24,7 +24,7 @@
 
                         <!-- Check if member has a last logged in date and display -->
                         {% if d['last-login'] %}
-                            <p><span><i class="fas fa-history"></i></span> <span class="code">{{ d['last-login']|timestamp_to_datetime(format_code='%Y-%b-%d %H:%M:%S')}}</span></p>
+                            <p><span><i class="fas fa-history"></i></span> <span class="code">{{ d['last-login']|timestamp_to_datetime(format_code='%Y-%b-%d %H:%M %p')}}</span></p>
                         {% endif %}
                     </article>
                 </article>
