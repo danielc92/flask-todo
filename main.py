@@ -6,15 +6,21 @@ from functools import wraps
 from datetime import datetime
 from random import choice
 from uuid import uuid4
-import hashlib, json, os
+import hashlib, json, os, binascii
 
 
 """ HELPER FUNCTIONS """
 
 def hash_password(password, salt):
-    """Return hashed SHA512 password, given password and salt."""
-    hashed = hashlib.sha512((password + salt).encode('utf-8')).hexdigest()
-    return hashed
+    """Return slow hashed SHA512 password, given password and salt."""
+    encode='utf-8'
+    dk = hashlib.pbkdf2_hmac('sha512', 
+                             bytes(password, encode), 
+                             bytes(salt, encode), 
+                             100000)
+    hashed = binascii.hexlify(dk)
+    hashed_string = hashed.decode(encode)
+    return hashed_string
 
 def validate_password(password):
     """Function to validate password."""
