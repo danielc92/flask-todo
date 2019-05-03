@@ -167,6 +167,7 @@ def register():
                 data['register-date'] = return_timestamp()
                 data['password'] = hash_password(data['password'], salt=app.config['SALT'])
                 data['tasks'] = []
+                data['identicon-url'] = 'https://avatars.dicebear.com/v2/identicon/{}.svg'.format(return_uuid())
                 mongo.db.todo.insert_one(data)
                 return redirect(url_for('login'))
 

@@ -11,19 +11,35 @@
             <div class="column is-one-third">
                 <article class="notification has-text-white move-up has-background-link" style="height: 100%;">
                     <article class="content">
-                        <h2 class="has-text-white cf-one">{{ d['name'] }}</h2>
+                        
+                        
+                        <section class="has-text-centered" style="margin: 1rem 0rem;">
+                        
+                        <!-- Image -->
+                        <div style="width: 140px; margin-left:auto; margin-right: auto;">
+                            <embed style="display: block; width:100%; height: auto;" src="{{ d['identicon-url'] }}"></embed>
+                        </div>
+
+                        <!-- Member Name -->    
+                        <h2 class="cf-one has-text-white">{{d['name']}}</h2>
                         
                         <!-- Member about yourself details -->
                         <p class="is-italic">"{{ d['about-yourself'] }}"</p>
-                        
-                        <!-- Member email -->
-                        <p><span><i class="fas fa-envelope"></i></span> <span class="code">{{ d['email'] }}</span></p>
-                        
-                        <!-- Member registration date -->
-                        <p><span><i class="fas fa-calendar-alt"></i></span> <span class="code">{{ d['register-date']|timestamp_to_datetime }}</span></p>
 
-                        <!-- Member last login-->
-                        <p><span><i class="fas fa-history"></i></span> <span class="code">{{ d['last-login']|timestamp_to_datetime(format_code='%Y-%b-%d %H:%M %p')}}</span></p>
+                        </section>
+                        
+
+                        
+                        <section style="font-size: 0.7rem;">
+                            <!-- Member email -->
+                            <p><span><i class="fas fa-envelope"></i></span> <span class="code">{{ d['email'] }}</span></p>
+                            
+                            <!-- Member registration date -->
+                            <p><span><i class="fas fa-calendar-alt"></i></span> <span class="code">{{ d['register-date']|timestamp_to_datetime }}</span></p>
+
+                            <!-- Member last login-->
+                            <p><span><i class="fas fa-history"></i></span> <span class="code">{{ d['last-login']|timestamp_to_datetime(format_code='%Y-%b-%d %H:%M %p')}}</span></p>
+                        </section>
                     </article>
                 </article>
             </div>
