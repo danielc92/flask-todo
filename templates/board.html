@@ -65,6 +65,16 @@
                         {% endfor %}
                 </article>
                 <article class="column">
+                    <h5 class="cf-one">Ready for Dev ({{ tasks_blocked|length }})</h5>
+                    {% if tasks_blocked|length < 1 %} <p>You have no tasks ready for dev.</p>
+                        {% endif %}
+                        {% for d in tasks_blocked %}
+                        <article class="notification move-up has-background-dark has-text-white">
+                            {% include 'task-template.html' %}
+                        </article>
+                        {% endfor %}
+                </article>
+                <article class="column">
                     <h5 class="cf-one">In Progress ({{ tasks_incomplete|length }})</h5>
                     {% if tasks_incomplete|length < 1 %} <p>You have no tasks, you can create one in the left panel.</p>
                         {% endif %}
