@@ -351,7 +351,7 @@ def home():
 
         # Auto-create uuid, status and date created for the user.
         task['uuid'] = return_uuid()
-        task['status'] = 'incomplete'
+        task['status'] = 'ready'
         task['date-created'] = return_timestamp()
 
         # Push task using session as unique id
@@ -363,7 +363,7 @@ def home():
 
         # Store task data on user level
         data = mongo.db.todo.find({'email': session['logged_in']})[0]
-        tasks = [t for t in data['tasks'] if t['status'] in ['complete', 'blocked', 'incomplete']]
+        tasks = [t for t in data['tasks'] if t['status'] in ['complete', 'blocked', 'incomplete', 'ready']]
 
         tasks_complete = [t for t in tasks if t['status'] == 'complete']
         tasks_incomplete = [t for t in tasks if t['status'] == 'incomplete']
