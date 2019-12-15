@@ -29,13 +29,18 @@ Install the following dependences:
 pip install flask flask_pymongo
 ```
 
-MongoDB
+MongoDB Installation via brew
 ```sh
 # Installation using brew
 brew install mongodb
 
 # Running locally
 mongod
+```
+
+MongoDB Installation via Docker
+```sh
+docker run --name mongo-instance -d -p 27017:27017 mongo
 ```
 
 # Tests
