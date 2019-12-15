@@ -383,7 +383,7 @@ def home():
 @login_required
 def about():
     """Render about page."""
-    return render_template('about.html', title='Todo - About')
+    return render_template('generic/about.html', title='Todo - About')
 
 
 @app.route('/task-update')
@@ -407,7 +407,7 @@ def update_task():
 @login_required
 def features():
     """Render features page."""
-    return render_template('features.html', title='Todo - Features')
+    return render_template('generic/features.html', title='Todo - Features')
 
 
 @app.route('/members')
@@ -415,7 +415,7 @@ def features():
 def members():
     """Query all members and render them as cards."""
     data = mongo.db.todo.find()
-    return render_template('members.html', data=data, title='Todo - Members')
+    return render_template('generic/members.html', data=data, title='Todo - Members')
 
 
 if __name__ == '__main__':
