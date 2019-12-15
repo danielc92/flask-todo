@@ -1,4 +1,5 @@
 <div class="content">
+    <!-- Title and delete button -->
     <section class="columns is-vcentered" style="margin-bottom: 0;">
         <div class="column is-four-fifths">
             <h5 class="cf-one has-text-white">{{ d['name'] }} </h5>
@@ -6,6 +7,8 @@
         <div class="column has-text-right" style="padding-top: 0;">
             <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a></div>
     </section>
+
+    <!-- Importance -->
     <p>{{ d['desc'] }} <strong class="has-text-white"> , this is important because </strong>{{ d['value'] }}</p>
     {# STATS #}
     <p class="help">

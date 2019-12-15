@@ -33,9 +33,9 @@
                 {% endfor %}
                 {% endfor %}
             </section>
-            <h1 class="cf-one" id="piles">Workflow</h1>
+            <h1 class="cf-one">Create a new task</h1>
             <section class="columns">
-                <article class="column">
+                <article class="column is-half">
                     <h5 class="cf-one">Create a task</h5>
                     <form class="form" method="post">
                         <div class="field">
@@ -54,6 +54,10 @@
                             <button class="button is-outlined is-success is-medium">Create task</button></div>
                     </form>
                 </article>
+            </section>
+            <h1 class="cf-one" id="piles">Workflow</h1>
+            <section class="columns">
+                
                 <article class="column">
                     <h5 class="cf-one">Blocked ({{ tasks_blocked|length }})</h5>
                     {% if tasks_blocked|length < 1 %} <p>You have no blocked tasks.</p>
@@ -65,11 +69,11 @@
                         {% endfor %}
                 </article>
                 <article class="column">
-                    <h5 class="cf-one">Ready for Dev ({{ tasks_blocked|length }})</h5>
-                    {% if tasks_blocked|length < 1 %} <p>You have no tasks ready for dev.</p>
+                    <h5 class="cf-one">Ready for Dev ({{ tasks_ready|length }})</h5>
+                    {% if tasks_ready|length < 1 %} <p>You have no tasks ready for dev.</p>
                         {% endif %}
-                        {% for d in tasks_blocked %}
-                        <article class="notification move-up has-background-dark has-text-white">
+                        {% for d in tasks_ready %}
+                        <article class="notification move-up has-background-warning has-text-white">
                             {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
