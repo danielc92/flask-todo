@@ -292,7 +292,7 @@ def register():
             return render_template('register.html', title='Todo - Register Page', error=error)
 
     else:
-        return render_template('register.html', title='Todo - Register Page')
+        return render_template('account/register.html', title='Todo - Register Page')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -327,7 +327,7 @@ def login():
 
     # Redirect to home
     else:
-        return render_template('login.html', title='Todo - Login Page')
+        return render_template('account/login.html', title='Todo - Login Page')
 
 @app.route('/logout')
 @login_required
@@ -368,13 +368,15 @@ def home():
         tasks_complete = [t for t in tasks if t['status'] == 'complete']
         tasks_incomplete = [t for t in tasks if t['status'] == 'incomplete']
         tasks_blocked = [t for t in tasks if t['status'] == 'blocked']
+        tasks_ready = [t for t in tasks if t['status'] == 'ready']
 
         return render_template('board/board.html',
                                quote=quote,
                                title='Todo - Board',
                                tasks_complete=tasks_complete,
                                tasks_incomplete=tasks_incomplete,
-                               tasks_blocked=tasks_blocked)
+                               tasks_blocked=tasks_blocked,
+                               tasks_ready=tasks_ready)
 
 
 @app.route('/about')
