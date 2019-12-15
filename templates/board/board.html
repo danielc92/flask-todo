@@ -60,7 +60,7 @@
                         {% endif %}
                         {% for d in tasks_blocked %}
                         <article class="notification move-up has-background-danger has-text-white">
-                            {% include 'task-template.html' %}
+                            {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
                 </article>
@@ -70,7 +70,7 @@
                         {% endif %}
                         {% for d in tasks_blocked %}
                         <article class="notification move-up has-background-dark has-text-white">
-                            {% include 'task-template.html' %}
+                            {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
                 </article>
@@ -80,7 +80,7 @@
                         {% endif %}
                         {% for d in tasks_incomplete %}
                         <article class="notification move-up has-background-link has-text-white">
-                            {% include 'task-template.html' %}
+                            {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
                 </article>
@@ -90,7 +90,7 @@
                         {% endif %}
                         {% for d in tasks_complete %}
                         <article class="notification move-up has-background-success has-text-white">
-                            {% include 'task-template.html' %}
+                            {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
                 </article>

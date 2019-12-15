@@ -369,7 +369,7 @@ def home():
         tasks_incomplete = [t for t in tasks if t['status'] == 'incomplete']
         tasks_blocked = [t for t in tasks if t['status'] == 'blocked']
 
-        return render_template('board.html',
+        return render_template('board/board.html',
                                quote=quote,
                                title='Todo - Board',
                                tasks_complete=tasks_complete,
