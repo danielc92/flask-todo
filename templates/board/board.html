@@ -73,7 +73,7 @@
                     {% if tasks_ready|length < 1 %} <p>You have no tasks ready for dev.</p>
                         {% endif %}
                         {% for d in tasks_ready %}
-                        <article class="notification move-up has-background-warning has-text-white">
+                        <article class="notification move-up has-background-info has-text-white">
                             {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
