@@ -70,7 +70,7 @@
                     {% if tasks_blocked|length < 1 %} <p>You have no blocked tasks.</p>
                         {% endif %}
                         {% for d in tasks_blocked %}
-                        <article class="notification move-up has-background-danger has-text-white">
+                        <article class="notification move-up is-danger">
                             {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
@@ -80,7 +80,7 @@
                     {% if tasks_ready|length < 1 %} <p>You have no tasks ready for dev.</p>
                         {% endif %}
                         {% for d in tasks_ready %}
-                        <article class="notification move-up has-background-info has-text-white">
+                        <article class="notification move-up is-info">
                             {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
@@ -90,7 +90,7 @@
                     {% if tasks_incomplete|length < 1 %} <p>You have no tasks, you can create one in the left panel.</p>
                         {% endif %}
                         {% for d in tasks_incomplete %}
-                        <article class="notification move-up has-background-link has-text-white">
+                        <article class="notification move-up is-link">
                             {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
@@ -100,7 +100,7 @@
                     {% if tasks_complete|length < 1 %} <p>You have not completed any tasks so far.</p>
                         {% endif %}
                         {% for d in tasks_complete %}
-                        <article class="notification move-up has-background-success has-text-white">
+                        <article class="notification move-up is-success">
                             {% include 'board/card.html' %}
                         </article>
                         {% endfor %}
