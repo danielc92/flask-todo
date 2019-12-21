@@ -1,36 +1,47 @@
-<div class="content">
+<section class="content">
     <!-- Title and delete button -->
-    <section class="columns is-vcentered" style="margin-bottom: 0;">
+    <article class="columns is-vcentered" style="margin-bottom: 0;">
         <div class="column is-four-fifths">
             <h5 class="cf-one has-text-white">{{ d['name'] }} </h5>
         </div>
         <div class="column has-text-right" style="padding-top: 0;">
             <a class="delete" href="{{ url_for('update_task', status='delete', uuid=d['uuid'])}}" aria-label="delete"></a></div>
-    </section>
+    </article>
 
-    <!-- Importance -->
-    <p>{{ d['desc'] }} <strong class="has-text-white"> , this is important because </strong>{{ d['value'] }}</p>
-    {# STATS #}
+    <!-- Description -->
+    
+    <p>{{ d['desc'] }}</p>
+   
+    <!-- Button Group  -->
+    <article>
+        {% if d['status'] == 'blocked' %}
+            <a class="button is-small is-outlined is-light is-danger" href="{{ url_for('update_task', status='ready', uuid=d['uuid'])}}">Ready for development</a>
+        {% elif d['status'] == 'incomplete' %}
+        
+            <a class="button is-small is-outlined is-light is-info" href="{{ url_for('update_task', status='complete', uuid=d['uuid'])}}">Completed</a>
+           <a class="button is-small is-outlined is-light is-info" href="{{ url_for('update_task', status='ready', uuid=d['uuid'])}}">Ready for development</a>
+        {% elif d['status'] == 'ready' %}
+            <a class="button is-small is-outlined is-light is-link" href="{{ url_for('update_task', status='blocked', uuid=d['uuid'])}}">Blocked</a>
+            <a class="button is-small is-outlined is-light is-link" href="{{ url_for('update_task', status='incomplete', uuid=d['uuid'])}}">Start working on this</a>
+        {% endif %}
+    </article>
+
+    
+    <!-- Timestamps -->
     <p class="help">
         <span class="icon">
             <i class="fas fa-clock"></i>
         </span>
-        <span class="code">{{ d['date-created']|timestamp_to_datetime(format_code='%d-%b-%Y %H:%M%p') }}</span>
+        <span class="code">{{ d['date-created']|timestamp_to_datetime(format_code='%d-%b-%y %H:%M%p') }}</span>
     </p>
     {% if d['date-completed'] %}
         <p class="help">
         <span class="icon"><i class="fas fa-stopwatch"></i></span><span class="code">{{ d['date-completed']|timestamp_to_datetime(format_code='%d-%b-%Y %H:%M%p') }}</span></p>
     {% endif %}
-        {#<p class="help"><span class="icon"><i class="fas fa-key"></i></span><span class="code">{{ d['uuid'][:12] }}...</span></p>#}
-    {# BUTTONS #}
-    {% if d['status'] == 'blocked' %}
-        <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='ready', uuid=d['uuid'])}}">Ready for development</a></p>
-    {% elif d['status'] == 'incomplete' %}
-      
-        <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='complete', uuid=d['uuid'])}}">Completed</a></p>
-        <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='ready', uuid=d['uuid'])}}">Ready for development</a></p>
-    {% elif d['status'] == 'ready' %}
-        <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='blocked', uuid=d['uuid'])}}">Blocked</a></p>
-        <p><a class="is-fullwidth button is-small is-outlined is-white" href="{{ url_for('update_task', status='incomplete', uuid=d['uuid'])}}">Start working on this</a></p>
-    {% endif %}
-</div>
+
+    <!-- Category -->
+    <p class="tag is-success is-light">{{ d['category'] }}</p>
+
+    
+    
+</section>

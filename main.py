@@ -228,7 +228,8 @@ def home():
         task = dict()
         task['name'] = request.form.get('task-name')
         task['desc'] = request.form.get('task-desc')
-        task['value'] = request.form.get('task-value')
+        print(request.form.get('task-category'), type(request.form.get('task-category')))
+        task['category'] = request.form.get('task-category')
 
         # Auto-create uuid, status and date created for the user.
         task['uuid'] = return_uuid()
