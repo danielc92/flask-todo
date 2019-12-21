@@ -100,7 +100,7 @@ mongo = PyMongo(app)
 
 
 # Load quote data
-with open('./quotes.json', 'r') as f:
+with open('./quotes.json', 'r', encoding='utf8', errors='ignore') as f:
     quotes = json.load(f)
 
 # Generate a random quote
@@ -156,7 +156,7 @@ def register():
                 error = 'Passwords must be between 10-20 characters and can only contain a-z, A-Z, 0-9, !@#$%^&*.'
 
             if error:
-                return render_template('register.html', error=error)
+                return render_template('account/register.html', error=error)
             else:
                 # Redirect to login page if successful.
                 data.pop('confirm-password')
@@ -167,10 +167,10 @@ def register():
                 mongo.db.todo.insert_one(data)
                 return redirect(url_for('login'))
 
-            return render_template('register.html', title='Todo - Register Page')
+            return render_template('account/register.html', title='Todo - Register Page')
         else:
             error = 'Captcha failed, try again.'
-            return render_template('register.html', title='Todo - Register Page', error=error)
+            return render_template('account/register.html', title='Todo - Register Page', error=error)
 
     else:
         return render_template('account/register.html', title='Todo - Register Page')
@@ -204,7 +204,7 @@ def login():
             error = 'Email does not exist.'
 
         if error:
-            return render_template('login.html', error=error)
+            return render_template('account/login.html', error=error)
 
     # Redirect to home
     else:
